@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>final Project</title>
+
+    <!-- IMPORT BOOTSTRAP + AXIOS-->
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+   
+    <script src="./node_modules/axios/dist/axios.min.js"></script>
+    <!-- // IMPORT BOOTSTRAP + AXIOS  // -->
+  
+   <style>
+      body{
+        background-color: #f0ecff;
+      }
+      .card{
+        margin-top: 30px;
+      }
+   </style>
+</head>
+<body>
+    
+    
+<!-- LOGIN MODAL -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">LOGIN</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Username</label>
+            <input type="text" class="form-control" id="username-input">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Password</label>
+            <input type="password" class="form-control" id="password-input">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="loginBtnClicked()" >Login</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--// LOGIN MODAL //-->
+
+
+
+<!-- NAVIGATION BAR CONTAINER -->
+ <div class=" container  ">
+
+     <div class="d-flex justify-content-center">
+   
+      <div class="container col-9   ">
+
+        <nav class="navbar navbar-expand-lg bg-body-tertiary shadow  rounded pt-3">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">Tarmeez</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav" style="width: 100%">
+                  <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  <a class="nav-link" href="#">Profile</a>
+                  <div class="d-flex  justify-content-end " style="width: 100%">
+                    <button type="button" class="btn btn-outline-success mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal" >Login</button>
+                    <button type="button" class="btn btn-outline-success">Register</button>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </nav>
+    </div>
+
+     </div>
+   
+ </div>
+
+<!--// NAVIGATION BAR CONTAINER //-->
+
+<!-- MAIN CONTENT -->
+<div class="container  " style="height: 1000px; ">
+    
+     <!-- POSTS  -->
+      
+     <div class="d-flex justify-content-center mt-5 ">
+   
+        <div class="container col-9   ">
+
+           <div id="posts">
+        
+               <!-- POST -->
+              
+               <!-- <div class="card shadow ">
+                    <div class="card-header">
+                      <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="./profile-pics/profile.png" alt="">
+                      <b>@Yarhmm</b>   
+                    </div>
+                    <div class="card-body">
+                      <img class="w-100" src="./profile-pics/Capture d'écran 2024-09-11 045622.png" alt="" >
+                      <h6 style="color: rgb(193, 193, 193);" class="mt-1" > 2 min ago</h6>
+                      <h5>hello world !</h5>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto doloribus consectetur, fuga quasi accusantium error illo quaerat tempora. Sint asperiores dolorem debitis veniam nulla excepturi? Iure ipsa qui numquam possimus?</p>
+                      <hr>
+                      <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                          <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
+                        </svg>
+                        <span>(3) comments</span>
+                      </div>
+                      
+                    </div>
+              </div>    -->
+               <!--// POST //-->
+
+
+                 <!-- POST -->
+              
+                 <!-- <div class="card shadow  ">
+                  <div class="card-header">
+                    <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="./profile-pics/profile.png" alt="">
+                    <b>@Yarhmm</b>   
+                  </div>
+                  <div class="card-body">
+                    <img class="w-100" src="./profile-pics/Capture d'écran 2024-09-11 045622.png" alt="" >
+                    <h6 style="color: rgb(193, 193, 193);" class="mt-1" > 2 min ago</h6>
+                    <h5>hello world !</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto doloribus consectetur, fuga quasi accusantium error illo quaerat tempora. Sint asperiores dolorem debitis veniam nulla excepturi? Iure ipsa qui numquam possimus?</p>
+                    <hr>
+                    <div>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
+                      </svg>
+                      <span>(3) comments</span>
+                    </div>
+                    
+                  </div>
+            </div>    -->
+             <!--// POST //-->
+
+
+               <!-- POST -->
+              
+               <!-- <div class="card shadow ">
+                <div class="card-header">
+                  <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="./profile-pics/profile.png" alt="">
+                  <b>@Yarhmm</b>   
+                </div>
+                <div class="card-body">
+                  <img class="w-100" src="./profile-pics/Capture d'écran 2024-09-11 045622.png" alt="" >
+                  <h6 style="color: rgb(193, 193, 193);" class="mt-1" > 2 min ago</h6>
+                  <h5>hello world !</h5>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto doloribus consectetur, fuga quasi accusantium error illo quaerat tempora. Sint asperiores dolorem debitis veniam nulla excepturi? Iure ipsa qui numquam possimus?</p>
+                  <hr>
+                  <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                      <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
+                    </svg>
+                    <span>(3) comments</span>
+                  </div>
+                  
+                </div>
+          </div>    -->
+           <!--// POST //-->
+
+
+             <!-- POST -->
+              
+             <!-- <div class="card shadow ">
+              <div class="card-header">
+                <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="./profile-pics/profile.png" alt="">
+                <b>@Yarhmm</b>   
+              </div>
+              <div class="card-body">
+                <img class="w-100" src="./profile-pics/Capture d'écran 2024-09-11 045622.png" alt="" >
+                <h6 style="color: rgb(193, 193, 193);" class="mt-1" > 2 min ago</h6>
+                <h5>hello world !</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto doloribus consectetur, fuga quasi accusantium error illo quaerat tempora. Sint asperiores dolorem debitis veniam nulla excepturi? Iure ipsa qui numquam possimus?</p>
+                <hr>
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                    <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
+                  </svg>
+                  <span>(3) comments</span>
+                </div>
+                
+              </div>
+        </div>    -->
+         <!--// POST //-->
+
+
+          <!-- POST -->
+<!--           
+          <div class="card shadow ">
+            <div class="card-header">
+              <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="./profile-pics/profile.png"
+                alt="">
+              <b>@Yarhmm</b>
+            </div>
+            <div class="card-body">
+              <img class="w-100" src="./profile-pics/Capture d'écran 2024-09-11 045622.png" alt="">
+              <h6 style="color: rgb(193, 193, 193);" class="mt-1"> 2 min ago</h6>
+              <h5>hello world !</h5>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto doloribus consectetur, fuga quasi accusantium
+                error illo quaerat tempora. Sint asperiores dolorem debitis veniam nulla excepturi? Iure ipsa qui numquam
+                possimus?</p>
+              <hr>
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen"
+                  viewBox="0 0 16 16">
+                  <path
+                    d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z" />
+                </svg>
+                <span>(3) comments</span>
+              </div>
+          
+            </div>
+          </div> -->
+          <!--// POST //-->
+          
+          
+          <!-- POST -->
+          
+          <!-- <div class="card shadow ">
+            <div class="card-header">
+              <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="./profile-pics/profile.png"
+                alt="">
+              <b>@Yarhmm</b>
+            </div>
+            <div class="card-body">
+              <img class="w-100" src="./profile-pics/Capture d'écran 2024-09-11 045622.png" alt="">
+              <h6 style="color: rgb(193, 193, 193);" class="mt-1"> 2 min ago</h6>
+              <h5>hello world !</h5>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto doloribus consectetur, fuga quasi accusantium
+                error illo quaerat tempora. Sint asperiores dolorem debitis veniam nulla excepturi? Iure ipsa qui numquam
+                possimus?</p>
+              <hr>
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen"
+                  viewBox="0 0 16 16">
+                  <path
+                    d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z" />
+                </svg>
+                <span>(3) comments</span>
+              </div>
+          
+            </div>
+          </div> -->
+          <!--// POST //-->
+
+           </div>
+
+       </div>
+
+
+    </div>
+
+     <!--// POSTS // -->
+
+</div>
+<!--// MAIN CONTENT //-->
+<img  id="po" src="" alt="">
+
+
+
+</body>
+
+
+<script>
+  
+  const baseUrl = "https://tarmeezacademy.com/api/v1" ;
+
+  axios.get(`${baseUrl}/posts?limit=2`)
+  .then(function (response) {
+    // handle success
+ 
+    const posts = response.data.data;
+    document.getElementById("posts").innerHTML= "";
+
+    for(let post of posts){
+      const  author = post.author;
+      let  postTitle = "";
+      if (post.title != null){
+           postTitle = post.title;
+      }
+      let content = `
+           <div class="card shadow ">
+                    <div class="card-header">
+                      <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="${author.profile_image}" alt="">
+                      <b>${author.username}</b>   
+                    </div>
+                    <div class="card-body">
+                      <img class="w-100" src="${post.image}" alt="" >
+                      <h6 style="color: rgb(193, 193, 193);" class="mt-1" > ${post.created_at}</h6>
+                      <h5>${postTitle}</h5>
+                      <p>${post.body}</p>
+                      <hr>
+                      <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                          <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
+                        </svg>
+                        <span>${post.comments_count}</span>
+                      </div>
+                      
+                    </div>
+              </div>   
+      `;
+      document.getElementById("posts").innerHTML += content;
+    }
+ 
+    
+  })
+  
+
+  function loginBtnClicked(){
+    const username = document.getElementById("username-input").value;
+    const password = document.getElementById("password-input").value;
+    
+    const params = {
+      "username" : username, 
+      "password" : password
+    }
+
+    const url = `${baseUrl}/login`;
+
+    axios.post(url, params)
+  .then(function (response) {
+    console.log(response.data);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+
+  }
+
+</script>
+</html>
