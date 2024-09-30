@@ -68,26 +68,26 @@
       <div class="modal-body">
         <form>
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Name</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <label for="recipient-name" class="col-form-label" >Name</label>
+            <input type="text" class="form-control" id="recipient-name" id="registerName">
           </div>
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Email</label>
-            <input type="text" class="form-control" >
+            <label for="recipient-name" class="col-form-label"  >Email</label>
+            <input type="text" class="form-control" id="registerEmail">
           </div>
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Username</label>
-            <input type="text" class="form-control" >
+            <label for="recipient-name" class="col-form-label" >Username</label>
+            <input type="text" class="form-control" id="registerUsername" >
           </div>
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Password</label>
-            <input type="text" class="form-control" >
+            <label for="recipient-name" class="col-form-label"  >Password</label>
+            <input type="text" class="form-control" id="registerPassword">
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Register</button>
+        <button type="button" class="btn btn-primary" onclick="registerBtnClicked()" >Register</button>
       </div>
     </div>
   </div>
@@ -397,9 +397,40 @@
   })
   
   
+  function registerBtnClicked(){
+    const name = document.getElementById("registerName").value;
+    const email = document.getElementById("registerEmail").value;
+    const username = document.getElementById("registerUsername").value;
+    const password = document.getElementById("registerPassword").value;
+
+    console.log(name);
+    console.log(email);
+    console.log(username);
+    console.log(password);
+
+
+    // les keys khas ndirhom entre "" 
+    const params = { 
+    "name" : name,  
+    "email" : email,
+    "username": username,
+    "password": password
+  }
+
+  const url =`${baseUrl}/register`;
+               
+    axios.post(url, params)
+  .then(function (response) {
+    alert("register is done");
+    console.log(response);
+
+  })
+  }
+
   function loginBtnClicked(){
     const username = document.getElementById("username-input").value;
     const password = document.getElementById("password-input").value;
+ 
     
     const params = {
       "username" : username, 
