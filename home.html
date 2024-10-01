@@ -57,6 +57,12 @@
 
 
 
+<!-- ALERTS -->
+<div id="success-alert" style="position: fixed; z-index: 999999; width: 30%; bottom: 0; right: 0;" ></div>
+
+ <!--// ALERTS //-->
+
+
 <!-- NAVIGATION BAR CONTAINER -->
  <div class=" container  ">
 
@@ -380,8 +386,9 @@
   
    const modalInstance = bootstrap.Modal.getInstance( modal);
    modalInstance.hide();
-   alert("user logged in successfully");
    setupUi();
+   showSuccessAlert();
+
  })
  }
 
@@ -414,6 +421,29 @@
       logoutDiv.style.setProperty("display", "flex", "important");
      }
   }
+
+
+
+function showSuccessAlert(){
+  const alertPlaceholder = document.getElementById('success-alert')
+  const appendAlert = (message, type) => {
+  const wrapper = document.createElement('div')
+  wrapper.innerHTML = [
+    `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+    `   <div>${message}</div>`,
+    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+    '</div>'
+  ].join('')
+
+  alertPlaceholder.append(wrapper)
+}
+
+
+    appendAlert('Nice, you triggered this alert message!', 'success')
+ 
+}  
+
+
 
 </script>
 </html>
