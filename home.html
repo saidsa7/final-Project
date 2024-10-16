@@ -96,6 +96,10 @@
             <label for="message-text" class="col-form-label">Password</label>
             <input type="password" class="form-control" id="register-password-input">
           </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Profile's Image</label>
+            <input type="file" class="form-control" id="register-image-input">
+          </div>
         </form>
       </div>
       <div class="modal-footer">
@@ -223,11 +227,7 @@
                   <!--non logged in user -->
                   <div id="login-div" class="d-flex  justify-content-end " style="width: 100%">
                     <button id="login-btn" type="button" class="btn btn-outline-success mx-2" data-bs-toggle="modal" data-bs-target="#login-modal" >Login</button>
-<<<<<<< HEAD
-                    <button id="register-btn" type="button" class="btn btn-outline-success"  data-bs-toggle="modal" data-bs-target="#exampleModal">Register</button>
-=======
                     <button id="register-btn" type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#register-modal" >Register</button>
->>>>>>> main
                   </div>
                   <!--//non logged in user //-->
 
@@ -516,6 +516,9 @@
     const email = document.getElementById("registerEmail").value;
     const username = document.getElementById("registerUsername").value;
     const password = document.getElementById("registerPassword").value;
+    const image = document.getElementById("register-image-input").files[0];
+
+
 
     console.log(name);
     console.log(email);
