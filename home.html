@@ -19,10 +19,27 @@
       .card{
         margin-top: 30px;
       }
+
+      #add-btn {
+        position: fixed;
+        bottom: 5%;
+        right: 7%;
+        height: 70px;
+        width: 70px;
+        font-size: 50px;
+        color: white;
+        border-radius: 100px;
+        text-align: center;
+        cursor: pointer;
+        box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
+        /* line-height: 0; */
+      }
    </style>
 </head>
 <body>
     
+
+<!--  ========= MODALS ======== -->
     
 <!-- LOGIN MODAL -->
 
@@ -56,9 +73,94 @@
 <!--// LOGIN MODAL //-->
 
 
+<!-- REGISTER MODAL -->
+
+<div class="modal fade" id="register-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">REGISTER a New User</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Name</label>
+            <input type="text" class="form-control" id="register-name-input">
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Username</label>
+            <input type="text" class="form-control" id="register-username-input">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Password</label>
+            <input type="password" class="form-control" id="register-password-input">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="registerBtnClicked()" >Register</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--// REGISTER MODAL //-->
+
+<!-- CREATE POST MODAL -->
+
+<div class="modal fade" id="create-post-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Create A New POST</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Title</label>
+            <input type="text" class="form-control" id="post-title-input">
+          </div>
+
+          <div class="mb-3"  >
+            <textarea  name="" id="post-body-input" style="resize: none; width: 100% ; height: 100px; border-color: gray; border-radius: 10px;"  ></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">image</label>
+            <input type="file" class="form-control" id="post-image-input">
+          </div>
+         
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="createNewPostClicked()" >Create</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--// CREATE POST MODAL //-->
+
+<!-- // ========= MODALS ======== //-->
+
+
+
+<!-- ADD POST BUTTON -->
+ <div class="bg-primary" id="add-btn" data-bs-toggle="modal" data-bs-target="#create-post-modal">
+   +
+ </div>
+<!--// ADD POST BUTTON //-->
+
+
+
 
 <!-- ALERTS -->
-<div id="success-alert" style="position: fixed; z-index: 999999; width: 30%; bottom: 0; right: 0;" ></div>
+<div class="fade show" id="success-alert" style="position: fixed; z-index: 999999; width: 30%; bottom: 0; right: 0;" ></div>
+
 
  <!--// ALERTS //-->
 
@@ -83,7 +185,7 @@
                   <!--non logged in user -->
                   <div id="login-div" class="d-flex  justify-content-end " style="width: 100%">
                     <button id="login-btn" type="button" class="btn btn-outline-success mx-2" data-bs-toggle="modal" data-bs-target="#login-modal" >Login</button>
-                    <button id="register-btn" type="button" class="btn btn-outline-success">Register</button>
+                    <button id="register-btn" type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#register-modal" >Register</button>
                   </div>
                   <!--//non logged in user //-->
 
@@ -302,68 +404,70 @@
 
   setupUi();
   
-  const baseUrl = "https://tarmeezacademy.com/api/v1" ;
+ const baseUrl = "https://tarmeezacademy.com/api/v1" ;
+ getPosts();
 
-  axios.get(`${baseUrl}/posts?limit=2`)
-  .then(function (response) {
-    // handle success
- 
-    const posts = response.data.data;
-    document.getElementById("posts").innerHTML= "";
+  function getPosts(){
 
-    console.log(response.data.data);
+    axios.get(`${baseUrl}/posts?limit=4`)
+   .then(function (response) {
+   // handle success
 
-    for(let post of posts){
-      const  author = post.author;
-      let  postTitle = "";
-      if (post.title != null){
-           postTitle = post.title;
-      }
-      
-     
+      const posts = response.data.data;
+      document.getElementById("posts").innerHTML= "";
 
-      let content = `
-           <div class="card shadow ">
-                    <div class="card-header">
-                      <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="${author.profile_image}" alt="">
-                      <b>${author.username}</b>   
+      for(let post of posts){
+       const  author = post.author;
+       let  postTitle = "";
+       if (post.title != null){
+         postTitle = post.title;
+       }
+    
+         let content = `
+         <div class="card shadow ">
+                  <div class="card-header">
+                    <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="${author.profile_image}" alt="">
+                    <b>${author.username}</b>   
+                  </div>
+                  <div class="card-body">
+                    <img class="w-100" src="${post.image}" alt="" >
+                    <h6 style="color: rgb(193, 193, 193);" class="mt-1" > ${post.created_at}</h6>
+                    <h5>${postTitle}</h5>
+                    <p>${post.body}</p>
+                    <hr>
+                    <div>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
+                      </svg>
+                      <span>
+                        ${post.comments_count} comments
+                          <span id="post-tags-${post.id}">
+                          </span
+                        </span> 
+                     
                     </div>
-                    <div class="card-body">
-                      <img class="w-100" src="${post.image}" alt="" >
-                      <h6 style="color: rgb(193, 193, 193);" class="mt-1" > ${post.created_at}</h6>
-                      <h5>${postTitle}</h5>
-                      <p>${post.body}</p>
-                      <hr>
-                      <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
-                          <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
-                        </svg>
-                        <span>${post.comments_count} comments </span> 
-                        <p id="theTags"></p> 
-                        
-
-
-
-                      </div>
-                      
-                    </div>
-              </div>   
+                    
+                  </div>
+            </div>   
+    `;
+    document.getElementById("posts").innerHTML += content;
+    
+    let currentPostTagsId = `post-tags-${post.id}`;
+    document.getElementById(currentPostTagsId).innerHTML = "";
+    for( tag of post.tags){
+      let tagsContent = `
+          <button class= "btn btn-sm  rounded-5" style="background-color : gray ; color : white" >
+               ${tag.name}
+          </button> 
       `;
-      document.getElementById("posts").innerHTML += content;
-      
-    console.log(response.data.data)
-     
-      // for(let tag of posts.tag){
+      document.getElementById(currentPostTagsId).innerHTML += tagsContent;     
+     }
+   
+  }
+})
+}
 
-      //   document.getElementById("theTags").innerHTML +=tag;
-      // }
-    
-    
 
-    }
- 
-  })
-  
   
   function loginBtnClicked(){
     const username = document.getElementById("username-input").value;
@@ -387,22 +491,50 @@
    const modalInstance = bootstrap.Modal.getInstance( modal);
    modalInstance.hide();
    setupUi();
-   showSuccessAlert();
+   showAlert("logged in successfully" , "success");
 
  })
  }
 
+ function registerBtnClicked(){
+    const name = document.getElementById("register-name-input").value;
+    const username = document.getElementById("register-username-input").value;
+    const password = document.getElementById("register-password-input").value;
+    
 
+    const params = {
+      "username" : username, 
+      "password" : password,
+      "name" : name
+    }
+
+    const url = `${baseUrl}/register`;
+
+    axios.post(url, params)
+  .then(function (response) {
+     
+   localStorage.setItem("token" , response.data.token);  
+   localStorage.setItem("user" , JSON.stringify (response.data.user) );  
+
+   const modal = document.getElementById("register-modal"); 
+  
+   const modalInstance = bootstrap.Modal.getInstance( modal);
+   modalInstance.hide();
+   setupUi();
+   showAlert("New User Registered successfully", "success");
+ }).catch( (error)=>{
+  const message = error.response.data.message;
+  showAlert(message , "danger");
+ } )
+}
 
 
 
   function logout(){
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    alert("logged out successfully");
     setupUi();
-
-
+    showAlert("logged out successfully");
   }
 
 
@@ -411,20 +543,65 @@
      const loginDiv = document.getElementById("login-div");
      const logoutDiv = document.getElementById("logout-div");
 
+     // ADD BUTTON
+     const addBtn = document.getElementById("add-btn");
+
      if (token == null)   //user is a guest ( not logged in)
      {
+         addBtn.style.setProperty("display", "none", "important");
          loginDiv.style.setProperty("display" , "flex" , "important");
          logoutDiv.style.setProperty("display", "none", "important");
+         
+
      }
      else{
+      addBtn.style.setProperty("display", "block", "important");
       loginDiv.style.setProperty("display" , "none" , "important");
       logoutDiv.style.setProperty("display", "flex", "important");
+  
+
      }
   }
 
 
+function  createNewPostClicked(){
+  
+  const title = document.getElementById("post-title-input").value;
+  const body = document.getElementById("post-body-input").value;
+  const image = document.getElementById("post-image-input").files[0];
 
-function showSuccessAlert(){
+    
+  let formData = new FormData(); 
+  formData.append("body", body);
+  formData.append("title", title);
+  formData.append("image", image);
+ 
+
+    const url = `${baseUrl}/posts`;
+    const token = localStorage.getItem("token");
+    const headers = {
+      "authorization" : `Bearer ${token}`
+    }
+    axios.post(url, formData, {
+      headers : headers
+    } )
+  .then( (response) => {
+    const modal = document.getElementById("create-post-modal"); 
+    const modalInstance = bootstrap.Modal.getInstance( modal);
+    modalInstance.hide();
+
+    showAlert("the Post has been created " , "success");
+    getPosts();
+
+   
+ })
+ .catch((error) =>{
+  const message = error.response.data.message;
+  showAlert(message , "danger");
+ })
+}  
+
+function showAlert(costumMessage, type="success"){
   const alertPlaceholder = document.getElementById('success-alert')
   const appendAlert = (message, type) => {
   const wrapper = document.createElement('div')
@@ -438,8 +615,15 @@ function showSuccessAlert(){
   alertPlaceholder.append(wrapper)
 }
 
+  
+    appendAlert(costumMessage, type);
 
-    appendAlert('Nice, you triggered this alert message!', 'success')
+    // todo : Hide the Alert
+    setTimeout(() => {
+      const alert = bootstrap.Alert.getOrCreateInstance('#success-alert')
+      // alert.close();
+
+    }, 2000);
  
 }  
 
