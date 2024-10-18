@@ -89,6 +89,10 @@
             <input type="text" class="form-control" id="register-name-input">
           </div>
           <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Profile Image</label>
+            <input type="file" class="form-control" id="register-image-input">
+          </div>
+          <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Username</label>
             <input type="text" class="form-control" id="register-username-input">
           </div>
@@ -191,8 +195,8 @@
 
 
                   <!-- for logged in user -->
-                  <div id="logout-div" class="d-flex  justify-content-end " style="width: 100%">
-                    <img  class="rounded-circle" style="width: 40px; height: 40px;" src="./profile-pics/profile.png" alt="">
+                  <div id="logout-div" class="d-flex  justify-content-end align-items-center " style="width: 100%">
+                    <img id="register-profile-image"   class="rounded-circle" style="width: 40px; height: 40px;" src="./profile-pics/profile.png" alt="">
                     <b id="nav-username" >
                       @Yarhmm
                     </b>
@@ -408,8 +412,9 @@
 
   setupUi();
   
- const baseUrl = "https://tarmeezacademy.com/api/v1" ;
- getPosts();
+  const baseUrl = "https://tarmeezacademy.com/api/v1" ;
+
+  getPosts();
 
   function getPosts(){
 
@@ -504,19 +509,21 @@
     const name = document.getElementById("register-name-input").value;
     const username = document.getElementById("register-username-input").value;
     const password = document.getElementById("register-password-input").value;
+    const image = document.getElementById("register-image-input").files[0];
     
 
-    const params = {
-      "username" : username, 
-      "password" : password,
-      "name" : name
-    }
+    const formData = new FormData();
+    formData.append("name" , name);
+    formData.append("username" , username);
+    formData.append("password" , password);
+    formData.append("image" , image);
+   
 
     const url = `${baseUrl}/register`;
 
-    axios.post(url, params)
+    axios.post(url, formData)
   .then(function (response) {
-     
+     console.log(response);
    localStorage.setItem("token" , response.data.token);  
    localStorage.setItem("user" , JSON.stringify (response.data.user) );  
 
@@ -526,12 +533,20 @@
    modalInstance.hide();
    setupUi();
    showAlert("New User Registered successfully", "success");
+   currentUser();
  }).catch( (error)=>{
   const message = error.response.data.message;
   showAlert(message , "danger");
  } )
 }
 
+function currentUser() {
+  let user = JSON.parse(localStorage.getItem("user"));
+  console.log(user.username , user.profile_image);
+  document.getElementById("register-profile-image").src = user.profile_image;
+  document.getElementById("nav-username").innerHTML = user.username;
+
+}
 
 
   function logout(){
