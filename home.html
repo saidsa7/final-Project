@@ -85,6 +85,10 @@
       <div class="modal-body">
         <form>
           <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Profile Image </label>
+            <input type="file" class="form-control" id="register-image-input">
+          </div>
+          <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Name</label>
             <input type="text" class="form-control" id="register-name-input">
           </div>
@@ -191,8 +195,8 @@
 
 
                   <!-- for logged in user -->
-                  <div id="logout-div" class="d-flex  justify-content-end " style="width: 100%">
-                    <img  class="rounded-circle" style="width: 40px; height: 40px;" src="./profile-pics/profile.png" alt="">
+                  <div id="logout-div" class="d-flex  justify-content-end align-items-center" style="width: 100%">
+                    <img  id="nav-user-image" class="rounded-circle" style="width: 40px; height: 40px;" src="./profile-pics/profile.png" alt="">
                     <b id="nav-username" >
                       @Yarhmm
                     </b>
@@ -504,19 +508,26 @@
     const name = document.getElementById("register-name-input").value;
     const username = document.getElementById("register-username-input").value;
     const password = document.getElementById("register-password-input").value;
-    
+    const image = document.getElementById("register-image-input").files[0];
 
-    const params = {
-      "username" : username, 
-      "password" : password,
-      "name" : name
+    
+  let formData = new FormData(); 
+  formData.append("name", name);
+  formData.append("username", username);
+  formData.append("password", password)
+  formData.append("image", image);
+ 
+
+    const headers = {
+     "Content-Type": "multipart/form-data"
     }
 
     const url = `${baseUrl}/register`;
-
-    axios.post(url, params)
+    axios.post(url, formData, {
+      headers : headers
+    })
   .then(function (response) {
-     
+   console.log(response.data);  
    localStorage.setItem("token" , response.data.token);  
    localStorage.setItem("user" , JSON.stringify (response.data.user) );  
 
@@ -558,15 +569,29 @@
          
 
      }
-     else{
+     else{  // for logged in user
       addBtn.style.setProperty("display", "block", "important");
       loginDiv.style.setProperty("display" , "none" , "important");
       logoutDiv.style.setProperty("display", "flex", "important");
-  
+      const user = getCurrentUser();
+      document.getElementById("nav-username").innerHTML = user.username; 
+      document.getElementById("nav-user-image").src = user.profile_image
 
      }
   }
 
+function getCurrentUser() 
+{
+  let user = null;
+  const storageUser = localStorage.getItem("user");
+
+  if (storageUser != null)
+  {
+    user = JSON.parse(storageUser);
+
+  }
+  return user;
+}
 
 function  createNewPostClicked(){
   
