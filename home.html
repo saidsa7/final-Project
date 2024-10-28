@@ -37,6 +37,9 @@
         box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
         /* line-height: 0; */
       }
+      #post-details {
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -373,7 +376,7 @@
     <!--// NAVIGATION BAR CONTAINER //-->
 
     <!-- MAIN CONTENT -->
-    <div class="container" style="height: 1000px">
+    <div id="all-posts" class="container" style="height: 1000px">
       <!-- POSTS  -->
 
       <div class="d-flex justify-content-center mt-5">
@@ -539,7 +542,61 @@
       <!--// POSTS // -->
     </div>
     <!--// MAIN CONTENT //-->
-    <img id="po" src="" alt="" />
+
+    <!-- POST DETAILS -->
+
+    <div id="post-details" class="container" style="height: 1000px">
+      <div class="d-flex justify-content-center mt-5">
+        <div class="container col-9">
+          <h1>Said</h1>
+
+          <div class="card shadow">
+            <div class="card-header">
+              <img
+                class="rounded-circle border border-2"
+                style="width: 40px; height: 40px"
+                src="./profile-pics/profile.png"
+                alt=""
+              />
+              <b>@Yarhmm</b>
+            </div>
+            <div class="card-body">
+              <img
+                class="w-100"
+                src="./profile-pics/Capture d'écran 2024-09-11 045622.png"
+                alt=""
+              />
+              <h6 style="color: rgb(193, 193, 193)" class="mt-1">2 min ago</h6>
+              <h5>hello world !</h5>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto
+                doloribus consectetur, fuga quasi accusantium error illo quaerat
+                tempora. Sint asperiores dolorem debitis veniam nulla excepturi?
+                Iure ipsa qui numquam possimus?
+              </p>
+              <hr />
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-pen"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"
+                  />
+                </svg>
+                <span>(3) comments</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- // POST DETAILS // -->
   </body>
 
   <script>
@@ -585,7 +642,7 @@
             }
 
             let content = `
-         <div class="card shadow ">
+         <div onclick = "showPostDetails()" class="card shadow ">
                   <div class="card-header">
                     <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="${author.profile_image}" alt="">
                     <b>${author.username}</b>   
@@ -683,6 +740,7 @@
           const modalInstance = bootstrap.Modal.getInstance(modal);
           modalInstance.hide();
           setupUi();
+          getPosts();
           showAlert("New User Registered successfully", "success");
         })
         .catch((error) => {
@@ -786,6 +844,14 @@
         const alert = bootstrap.Alert.getOrCreateInstance("#success-alert");
         // alert.close();
       }, 2000);
+    }
+
+    function showPostDetails(username) {
+      // hide big container
+      // show post details
+      document.getElementById("all-posts").style.display = "none";
+      document.getElementById("post-details").style.display = "block";
+      console.log(username);
     }
   </script>
 </html>
