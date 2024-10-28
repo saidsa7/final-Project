@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>final Project</title>
 
     <!-- IMPORT BOOTSTRAP + AXIOS-->
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
-   
+    <link
+      rel="stylesheet"
+      href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+
     <script src="./node_modules/axios/dist/axios.min.js"></script>
     <!-- // IMPORT BOOTSTRAP + AXIOS  // -->
-  
-   <style>
-      body{
+
+    <style>
+      body {
         background-color: #f0ecff;
       }
-      .card{
+      .card {
         margin-top: 30px;
       }
 
@@ -34,206 +37,351 @@
         box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
         /* line-height: 0; */
       }
-   </style>
-</head>
-<body>
-    
+    </style>
+  </head>
+  <body>
+    <!--  ========= MODALS ======== -->
 
-<!--  ========= MODALS ======== -->
-    
-<!-- LOGIN MODAL -->
+    <!-- LOGIN MODAL -->
 
-<div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">LOGIN</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Username</label>
-            <input type="text" class="form-control" id="username-input">
+    <div
+      class="modal fade"
+      id="login-modal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">LOGIN</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
-          <div class="mb-3">
-            <label for="message-text" class="col-form-label">Password</label>
-            <input type="password" class="form-control" id="password-input">
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label"
+                  >Username</label
+                >
+                <input type="text" class="form-control" id="username-input" />
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label"
+                  >Password</label
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password-input"
+                />
+              </div>
+            </form>
           </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="loginBtnClicked()" >Login</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--// LOGIN MODAL //-->
-
-
-<!-- REGISTER MODAL -->
-
-<div class="modal fade" id="register-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">REGISTER a New User</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Profile Image </label>
-            <input type="file" class="form-control" id="register-image-input">
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="loginBtnClicked()"
+            >
+              Login
+            </button>
           </div>
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Name</label>
-            <input type="text" class="form-control" id="register-name-input">
-          </div>
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Username</label>
-            <input type="text" class="form-control" id="register-username-input">
-          </div>
-          <div class="mb-3">
-            <label for="message-text" class="col-form-label">Password</label>
-            <input type="password" class="form-control" id="register-password-input">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="registerBtnClicked()" >Register</button>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<!--// REGISTER MODAL //-->
+    <!--// LOGIN MODAL //-->
 
-<!-- CREATE POST MODAL -->
+    <!-- REGISTER MODAL -->
 
-<div class="modal fade" id="create-post-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Create A New POST</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Title</label>
-            <input type="text" class="form-control" id="post-title-input">
+    <div
+      class="modal fade"
+      id="register-modal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              REGISTER a New User
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
-
-          <div class="mb-3"  >
-            <textarea  name="" id="post-body-input" style="resize: none; width: 100% ; height: 100px; border-color: gray; border-radius: 10px;"  ></textarea>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label"
+                  >Profile Image
+                </label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="register-image-input"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="register-name-input"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label"
+                  >Username</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="register-username-input"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label"
+                  >Password</label
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  id="register-password-input"
+                />
+              </div>
+            </form>
           </div>
-
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">image</label>
-            <input type="file" class="form-control" id="post-image-input">
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="registerBtnClicked()"
+            >
+              Register
+            </button>
           </div>
-         
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="createNewPostClicked()" >Create</button>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<!--// CREATE POST MODAL //-->
+    <!--// REGISTER MODAL //-->
 
-<!-- // ========= MODALS ======== //-->
+    <!-- CREATE POST MODAL -->
 
+    <div
+      class="modal fade"
+      id="create-post-modal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Create A New POST
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Title</label>
+                <input type="text" class="form-control" id="post-title-input" />
+              </div>
 
+              <div class="mb-3">
+                <textarea
+                  name=""
+                  id="post-body-input"
+                  style="
+                    resize: none;
+                    width: 100%;
+                    height: 100px;
+                    border-color: gray;
+                    border-radius: 10px;
+                  "
+                ></textarea>
+              </div>
 
-<!-- ADD POST BUTTON -->
- <div class="bg-primary" id="add-btn" data-bs-toggle="modal" data-bs-target="#create-post-modal">
-   +
- </div>
-<!--// ADD POST BUTTON //-->
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">image</label>
+                <input type="file" class="form-control" id="post-image-input" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="createNewPostClicked()"
+            >
+              Create
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <!--// CREATE POST MODAL //-->
 
+    <!-- // ========= MODALS ======== //-->
 
+    <!-- ADD POST BUTTON -->
+    <div
+      class="bg-primary"
+      id="add-btn"
+      data-bs-toggle="modal"
+      data-bs-target="#create-post-modal"
+    >
+      +
+    </div>
+    <!--// ADD POST BUTTON //-->
 
-<!-- ALERTS -->
-<div class="fade show" id="success-alert" style="position: fixed; z-index: 999999; width: 30%; bottom: 0; right: 0;" ></div>
+    <!-- ALERTS -->
+    <div
+      class="fade show"
+      id="success-alert"
+      style="position: fixed; z-index: 999999; width: 30%; bottom: 0; right: 0"
+    ></div>
 
+    <!--// ALERTS //-->
 
- <!--// ALERTS //-->
-
-
-<!-- NAVIGATION BAR CONTAINER -->
- <div class=" container  ">
-
-     <div class="d-flex justify-content-center">
-   
-      <div class="container col-9   ">
-
-        <nav class="navbar navbar-expand-lg bg-body-tertiary shadow  rounded pt-3">
+    <!-- NAVIGATION BAR CONTAINER -->
+    <div class="container">
+      <div class="d-flex justify-content-center">
+        <div class="container col-9">
+          <nav
+            class="navbar navbar-expand-lg bg-body-tertiary shadow rounded pt-3"
+          >
             <div class="container-fluid">
               <a class="navbar-brand" href="#">Tarmeez</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav" style="width: 100%">
-                  <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  <a class="nav-link active" aria-current="page" href="#"
+                    >Home</a
+                  >
                   <a class="nav-link" href="#">Profile</a>
                   <!--non logged in user -->
-                  <div id="login-div" class="d-flex  justify-content-end " style="width: 100%">
-                    <button id="login-btn" type="button" class="btn btn-outline-success mx-2" data-bs-toggle="modal" data-bs-target="#login-modal" >Login</button>
-                    <button id="register-btn" type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#register-modal" >Register</button>
+                  <div
+                    id="login-div"
+                    class="d-flex justify-content-end"
+                    style="width: 100%"
+                  >
+                    <button
+                      id="login-btn"
+                      type="button"
+                      class="btn btn-outline-success mx-2"
+                      data-bs-toggle="modal"
+                      data-bs-target="#login-modal"
+                    >
+                      Login
+                    </button>
+                    <button
+                      id="register-btn"
+                      type="button"
+                      class="btn btn-outline-success"
+                      data-bs-toggle="modal"
+                      data-bs-target="#register-modal"
+                    >
+                      Register
+                    </button>
                   </div>
                   <!--//non logged in user //-->
 
-
                   <!-- for logged in user -->
-                  <div id="logout-div" class="d-flex  justify-content-end align-items-center" style="width: 100%">
-                    <img  id="nav-user-image" class="rounded-circle" style="width: 40px; height: 40px;" src="./profile-pics/profile.png" alt="">
-                    <b id="nav-username" >
-                      @Yarhmm
-                    </b>
-                    <button onclick="logout()" id="logout-btn" type="button" class="btn btn-outline-danger mx-2" data-bs-toggle="modal" >Logout</button>
-                    
+                  <div
+                    id="logout-div"
+                    class="d-flex justify-content-end align-items-center"
+                    style="width: 100%"
+                  >
+                    <img
+                      id="nav-user-image"
+                      class="rounded-circle"
+                      style="width: 40px; height: 40px"
+                      src="./profile-pics/profile.png"
+                      alt=""
+                    />
+                    <b id="nav-username"> @Yarhmm </b>
+                    <button
+                      onclick="logout()"
+                      id="logout-btn"
+                      type="button"
+                      class="btn btn-outline-danger mx-2"
+                      data-bs-toggle="modal"
+                    >
+                      Logout
+                    </button>
                   </div>
-                      
+
                   <!--// for logged in user //-->
-
-
-                  
                 </div>
               </div>
             </div>
           </nav>
+        </div>
+      </div>
     </div>
 
-     </div>
-   
- </div>
+    <!--// NAVIGATION BAR CONTAINER //-->
 
-<!--// NAVIGATION BAR CONTAINER //-->
+    <!-- MAIN CONTENT -->
+    <div class="container" style="height: 1000px">
+      <!-- POSTS  -->
 
-<!-- MAIN CONTENT -->
-<div class="container  " style="height: 1000px; ">
-    
-     <!-- POSTS  -->
-      
-     <div class="d-flex justify-content-center mt-5 ">
-   
-        <div class="container col-9   ">
+      <div class="d-flex justify-content-center mt-5">
+        <div class="container col-9">
+          <div id="posts">
+            <!-- POST -->
 
-           <div id="posts">
-        
-               <!-- POST -->
-              
-               <!-- <div class="card shadow ">
+            <!-- <div class="card shadow ">
                     <div class="card-header">
                       <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="./profile-pics/profile.png" alt="">
                       <b>@Yarhmm</b>   
@@ -253,12 +401,11 @@
                       
                     </div>
               </div>    -->
-               <!--// POST //-->
+            <!--// POST //-->
 
+            <!-- POST -->
 
-                 <!-- POST -->
-              
-                 <!-- <div class="card shadow  ">
+            <!-- <div class="card shadow  ">
                   <div class="card-header">
                     <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="./profile-pics/profile.png" alt="">
                     <b>@Yarhmm</b>   
@@ -278,12 +425,11 @@
                     
                   </div>
             </div>    -->
-             <!--// POST //-->
+            <!--// POST //-->
 
+            <!-- POST -->
 
-               <!-- POST -->
-              
-               <!-- <div class="card shadow ">
+            <!-- <div class="card shadow ">
                 <div class="card-header">
                   <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="./profile-pics/profile.png" alt="">
                   <b>@Yarhmm</b>   
@@ -303,12 +449,11 @@
                   
                 </div>
           </div>    -->
-           <!--// POST //-->
+            <!--// POST //-->
 
+            <!-- POST -->
 
-             <!-- POST -->
-              
-             <!-- <div class="card shadow ">
+            <!-- <div class="card shadow ">
               <div class="card-header">
                 <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="./profile-pics/profile.png" alt="">
                 <b>@Yarhmm</b>   
@@ -328,11 +473,10 @@
                 
               </div>
         </div>    -->
-         <!--// POST //-->
+            <!--// POST //-->
 
-
-          <!-- POST -->
-<!--           
+            <!-- POST -->
+            <!--           
           <div class="card shadow ">
             <div class="card-header">
               <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="./profile-pics/profile.png"
@@ -358,12 +502,11 @@
           
             </div>
           </div> -->
-          <!--// POST //-->
-          
-          
-          <!-- POST -->
-          
-          <!-- <div class="card shadow ">
+            <!--// POST //-->
+
+            <!-- POST -->
+
+            <!-- <div class="card shadow ">
             <div class="card-header">
               <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="./profile-pics/profile.png"
                 alt="">
@@ -388,50 +531,60 @@
           
             </div>
           </div> -->
-          <!--// POST //-->
+            <!--// POST //-->
+          </div>
+        </div>
+      </div>
 
-           </div>
-
-       </div>
-
-
+      <!--// POSTS // -->
     </div>
+    <!--// MAIN CONTENT //-->
+    <img id="po" src="" alt="" />
+  </body>
 
-     <!--// POSTS // -->
+  <script>
+    const baseUrl = "https://tarmeezacademy.com/api/v1";
+    let currentPage = 1;
+    let lastPage = 1;
 
-</div>
-<!--// MAIN CONTENT //-->
-<img  id="po" src="" alt="">
+    //===================== INFINITE SCROLL============================= //
+    window.addEventListener("scroll", function () {
+      const endOfPage =
+        window.innerHeight + window.pageYOffset >= document.body.offsetHeight;
+      if (endOfPage && currentPage < lastPage) {
+        // c equivalent a if(endofpage == true)
+        currentPage = currentPage + 1;
+        getPosts(false, currentPage);
+      }
+    });
+    //=====================// INFINITE SCROLL // ======================= //
 
+    setupUi();
 
+    getPosts();
 
-</body>
+    function getPosts(reload = true, page = 1) {
+      axios
+        .get(`${baseUrl}/posts?limit=2&page=${page}`)
+        .then(function (response) {
+          // handle success
 
+          const posts = response.data.data;
 
-<script>
+          lastPage = response.data.meta.last_page;
 
-  setupUi();
-  
- const baseUrl = "https://tarmeezacademy.com/api/v1" ;
- getPosts();
+          if (reload) {
+            document.getElementById("posts").innerHTML = "";
+          }
 
-  function getPosts(){
+          for (let post of posts) {
+            const author = post.author;
+            let postTitle = "";
+            if (post.title != null) {
+              postTitle = post.title;
+            }
 
-    axios.get(`${baseUrl}/posts?limit=4`)
-   .then(function (response) {
-   // handle success
-
-      const posts = response.data.data;
-      document.getElementById("posts").innerHTML= "";
-
-      for(let post of posts){
-       const  author = post.author;
-       let  postTitle = "";
-       if (post.title != null){
-         postTitle = post.title;
-       }
-    
-         let content = `
+            let content = `
          <div class="card shadow ">
                   <div class="card-header">
                     <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="${author.profile_image}" alt="">
@@ -458,205 +611,181 @@
                   </div>
             </div>   
     `;
-    document.getElementById("posts").innerHTML += content;
-    
-    let currentPostTagsId = `post-tags-${post.id}`;
-    document.getElementById(currentPostTagsId).innerHTML = "";
-    for( tag of post.tags){
-      let tagsContent = `
+            document.getElementById("posts").innerHTML += content;
+
+            let currentPostTagsId = `post-tags-${post.id}`;
+            document.getElementById(currentPostTagsId).innerHTML = "";
+            for (tag of post.tags) {
+              let tagsContent = `
           <button class= "btn btn-sm  rounded-5" style="background-color : gray ; color : white" >
                ${tag.name}
           </button> 
       `;
-      document.getElementById(currentPostTagsId).innerHTML += tagsContent;     
-     }
-   
-  }
-})
-}
-
-
-  
-  function loginBtnClicked(){
-    const username = document.getElementById("username-input").value;
-    const password = document.getElementById("password-input").value;
-    
-    const params = {
-      "username" : username, 
-      "password" : password
+              document.getElementById(currentPostTagsId).innerHTML +=
+                tagsContent;
+            }
+          }
+        });
     }
 
-    const url = `${baseUrl}/login`;
+    function loginBtnClicked() {
+      const username = document.getElementById("username-input").value;
+      const password = document.getElementById("password-input").value;
 
-    axios.post(url, params)
-  .then(function (response) {
-     
-   localStorage.setItem("token" , response.data.token);  
-   localStorage.setItem("user" , JSON.stringify (response.data.user) );  
+      const params = {
+        username: username,
+        password: password,
+      };
 
-   const modal = document.getElementById("login-modal"); 
-  
-   const modalInstance = bootstrap.Modal.getInstance( modal);
-   modalInstance.hide();
-   setupUi();
-   showAlert("logged in successfully" , "success");
+      const url = `${baseUrl}/login`;
 
- })
- }
+      axios.post(url, params).then(function (response) {
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
 
- function registerBtnClicked(){
-    const name = document.getElementById("register-name-input").value;
-    const username = document.getElementById("register-username-input").value;
-    const password = document.getElementById("register-password-input").value;
-    const image = document.getElementById("register-image-input").files[0];
+        const modal = document.getElementById("login-modal");
 
-    
-  let formData = new FormData(); 
-  formData.append("name", name);
-  formData.append("username", username);
-  formData.append("password", password)
-  formData.append("image", image);
- 
-
-    const headers = {
-     "Content-Type": "multipart/form-data"
+        const modalInstance = bootstrap.Modal.getInstance(modal);
+        modalInstance.hide();
+        setupUi();
+        showAlert("logged in successfully", "success");
+      });
     }
 
-    const url = `${baseUrl}/register`;
-    axios.post(url, formData, {
-      headers : headers
-    })
-  .then(function (response) {
-   console.log(response.data);  
-   localStorage.setItem("token" , response.data.token);  
-   localStorage.setItem("user" , JSON.stringify (response.data.user) );  
+    function registerBtnClicked() {
+      const name = document.getElementById("register-name-input").value;
+      const username = document.getElementById("register-username-input").value;
+      const password = document.getElementById("register-password-input").value;
+      const image = document.getElementById("register-image-input").files[0];
 
-   const modal = document.getElementById("register-modal"); 
-  
-   const modalInstance = bootstrap.Modal.getInstance( modal);
-   modalInstance.hide();
-   setupUi();
-   showAlert("New User Registered successfully", "success");
- }).catch( (error)=>{
-  const message = error.response.data.message;
-  showAlert(message , "danger");
- } )
-}
+      let formData = new FormData();
+      formData.append("name", name);
+      formData.append("username", username);
+      formData.append("password", password);
+      formData.append("image", image);
 
+      const headers = {
+        "Content-Type": "multipart/form-data",
+      };
 
+      const url = `${baseUrl}/register`;
+      axios
+        .post(url, formData, {
+          headers: headers,
+        })
+        .then(function (response) {
+          console.log(response.data);
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("user", JSON.stringify(response.data.user));
 
-  function logout(){
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setupUi();
-    showAlert("logged out successfully");
-  }
+          const modal = document.getElementById("register-modal");
 
-
- function setupUi(){
-     const token = localStorage.getItem("token");
-     const loginDiv = document.getElementById("login-div");
-     const logoutDiv = document.getElementById("logout-div");
-
-     // ADD BUTTON
-     const addBtn = document.getElementById("add-btn");
-
-     if (token == null)   //user is a guest ( not logged in)
-     {
-         addBtn.style.setProperty("display", "none", "important");
-         loginDiv.style.setProperty("display" , "flex" , "important");
-         logoutDiv.style.setProperty("display", "none", "important");
-         
-
-     }
-     else{  // for logged in user
-      addBtn.style.setProperty("display", "block", "important");
-      loginDiv.style.setProperty("display" , "none" , "important");
-      logoutDiv.style.setProperty("display", "flex", "important");
-      const user = getCurrentUser();
-      document.getElementById("nav-username").innerHTML = user.username; 
-      document.getElementById("nav-user-image").src = user.profile_image
-
-     }
-  }
-
-function getCurrentUser() 
-{
-  let user = null;
-  const storageUser = localStorage.getItem("user");
-
-  if (storageUser != null)
-  {
-    user = JSON.parse(storageUser);
-
-  }
-  return user;
-}
-
-function  createNewPostClicked(){
-  
-  const title = document.getElementById("post-title-input").value;
-  const body = document.getElementById("post-body-input").value;
-  const image = document.getElementById("post-image-input").files[0];
-
-    
-  let formData = new FormData(); 
-  formData.append("body", body);
-  formData.append("title", title);
-  formData.append("image", image);
- 
-
-    const url = `${baseUrl}/posts`;
-    const token = localStorage.getItem("token");
-    const headers = {
-      "authorization" : `Bearer ${token}`
+          const modalInstance = bootstrap.Modal.getInstance(modal);
+          modalInstance.hide();
+          setupUi();
+          showAlert("New User Registered successfully", "success");
+        })
+        .catch((error) => {
+          const message = error.response.data.message;
+          showAlert(message, "danger");
+        });
     }
-    axios.post(url, formData, {
-      headers : headers
-    } )
-  .then( (response) => {
-    const modal = document.getElementById("create-post-modal"); 
-    const modalInstance = bootstrap.Modal.getInstance( modal);
-    modalInstance.hide();
 
-    showAlert("the Post has been created " , "success");
-    getPosts();
+    function logout() {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      setupUi();
+      showAlert("logged out successfully");
+    }
 
-   
- })
- .catch((error) =>{
-  const message = error.response.data.message;
-  showAlert(message , "danger");
- })
-}  
+    function setupUi() {
+      const token = localStorage.getItem("token");
+      const loginDiv = document.getElementById("login-div");
+      const logoutDiv = document.getElementById("logout-div");
 
-function showAlert(costumMessage, type="success"){
-  const alertPlaceholder = document.getElementById('success-alert')
-  const appendAlert = (message, type) => {
-  const wrapper = document.createElement('div')
-  wrapper.innerHTML = [
-    `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-    `   <div>${message}</div>`,
-    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-    '</div>'
-  ].join('')
+      // ADD BUTTON
+      const addBtn = document.getElementById("add-btn");
 
-  alertPlaceholder.append(wrapper)
-}
+      if (token == null) {
+        //user is a guest ( not logged in)
+        addBtn.style.setProperty("display", "none", "important");
+        loginDiv.style.setProperty("display", "flex", "important");
+        logoutDiv.style.setProperty("display", "none", "important");
+      } else {
+        // for logged in user
+        addBtn.style.setProperty("display", "block", "important");
+        loginDiv.style.setProperty("display", "none", "important");
+        logoutDiv.style.setProperty("display", "flex", "important");
+        const user = getCurrentUser();
+        document.getElementById("nav-username").innerHTML = user.username;
+        document.getElementById("nav-user-image").src = user.profile_image;
+      }
+    }
 
-  
-    appendAlert(costumMessage, type);
+    function getCurrentUser() {
+      let user = null;
+      const storageUser = localStorage.getItem("user");
 
-    // todo : Hide the Alert
-    setTimeout(() => {
-      const alert = bootstrap.Alert.getOrCreateInstance('#success-alert')
-      // alert.close();
+      if (storageUser != null) {
+        user = JSON.parse(storageUser);
+      }
+      return user;
+    }
 
-    }, 2000);
- 
-}  
+    function createNewPostClicked() {
+      const title = document.getElementById("post-title-input").value;
+      const body = document.getElementById("post-body-input").value;
+      const image = document.getElementById("post-image-input").files[0];
 
+      let formData = new FormData();
+      formData.append("body", body);
+      formData.append("title", title);
+      formData.append("image", image);
 
+      const url = `${baseUrl}/posts`;
+      const token = localStorage.getItem("token");
+      const headers = {
+        authorization: `Bearer ${token}`,
+      };
+      axios
+        .post(url, formData, {
+          headers: headers,
+        })
+        .then((response) => {
+          const modal = document.getElementById("create-post-modal");
+          const modalInstance = bootstrap.Modal.getInstance(modal);
+          modalInstance.hide();
 
-</script>
+          showAlert("the Post has been created ", "success");
+          getPosts();
+        })
+        .catch((error) => {
+          const message = error.response.data.message;
+          showAlert(message, "danger");
+        });
+    }
+
+    function showAlert(costumMessage, type = "success") {
+      const alertPlaceholder = document.getElementById("success-alert");
+      const appendAlert = (message, type) => {
+        const wrapper = document.createElement("div");
+        wrapper.innerHTML = [
+          `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+          `   <div>${message}</div>`,
+          '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+          "</div>",
+        ].join("");
+
+        alertPlaceholder.append(wrapper);
+      };
+
+      appendAlert(costumMessage, type);
+
+      // todo : Hide the Alert
+      setTimeout(() => {
+        const alert = bootstrap.Alert.getOrCreateInstance("#success-alert");
+        // alert.close();
+      }, 2000);
+    }
+  </script>
 </html>
