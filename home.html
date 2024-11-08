@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>final Project</title>
 
     <!-- IMPORT BOOTSTRAP + AXIOS-->
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
-   
+    <link
+      rel="stylesheet"
+      href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+
     <script src="./node_modules/axios/dist/axios.min.js"></script>
     <!-- // IMPORT BOOTSTRAP + AXIOS  // -->
-  
-   <style>
-      body{
+
+    <style>
+      body {
         background-color: #f0ecff;
       }
-      .card{
+      .card {
         margin-top: 30px;
       }
 
@@ -34,68 +37,154 @@
         box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
         /* line-height: 0; */
       }
-   </style>
-</head>
-<body>
-    
+    </style>
+  </head>
+  <body>
+    <!--  ========= MODALS ======== -->
 
-<!--  ========= MODALS ======== -->
-    
-<!-- LOGIN MODAL -->
+    <!-- LOGIN MODAL -->
 
-<div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">LOGIN</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Username</label>
-            <input type="text" class="form-control" id="username-input">
+    <div
+      class="modal fade"
+      id="login-modal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">LOGIN</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
-          <div class="mb-3">
-            <label for="message-text" class="col-form-label">Password</label>
-            <input type="password" class="form-control" id="password-input">
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label"
+                  >Username</label
+                >
+                <input type="text" class="form-control" id="username-input" />
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label"
+                  >Password</label
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password-input"
+                />
+              </div>
+            </form>
           </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="loginBtnClicked()" >Login</button>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="loginBtnClicked()"
+            >
+              Login
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<!--// LOGIN MODAL //-->
+    <!--// LOGIN MODAL //-->
 
+    <!-- REGISTER MODAL -->
 
-<!-- REGISTER MODAL -->
-
-<div class="modal fade" id="register-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">REGISTER a New User</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Name</label>
-            <input type="text" class="form-control" id="register-name-input">
+    <div
+      class="modal fade"
+      id="register-modal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              REGISTER a New User
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Username</label>
-            <input type="text" class="form-control" id="register-username-input">
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label"
+                  >Profile Image
+                </label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="register-image-input"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="register-name-input"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label"
+                  >Username</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="register-username-input"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label"
+                  >Password</label
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  id="register-password-input"
+                />
+              </div>
+            </form>
           </div>
-          <div class="mb-3">
-            <label for="message-text" class="col-form-label">Password</label>
-            <input type="password" class="form-control" id="register-password-input">
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="registerBtnClicked()"
+            >
+              Register
+            </button>
           </div>
+<<<<<<< HEAD
           <div class="mb-3">
             <label for="message-text" class="col-form-label">Profile's Image</label>
             <input type="file" class="form-control" id="register-image-input">
@@ -105,60 +194,108 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" onclick="registerBtnClicked()" >Register</button>
+=======
+        </div>
+>>>>>>> main
       </div>
     </div>
-  </div>
-</div>
 
-<!--// REGISTER MODAL //-->
+    <!--// REGISTER MODAL //-->
 
-<!-- CREATE POST MODAL -->
+    <!-- CREATE POST MODAL -->
 
-<div class="modal fade" id="create-post-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Create A New POST</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Title</label>
-            <input type="text" class="form-control" id="post-title-input">
+    <div
+      class="modal fade"
+      id="create-post-modal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Create A New POST
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Title</label>
+                <input type="text" class="form-control" id="post-title-input" />
+              </div>
 
-          <div class="mb-3"  >
-            <textarea  name="" id="post-body-input" style="resize: none; width: 100% ; height: 100px; border-color: gray; border-radius: 10px;"  ></textarea>
-          </div>
+              <div class="mb-3">
+                <textarea
+                  name=""
+                  id="post-body-input"
+                  style="
+                    resize: none;
+                    width: 100%;
+                    height: 100px;
+                    border-color: gray;
+                    border-radius: 10px;
+                  "
+                ></textarea>
+              </div>
 
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">image</label>
-            <input type="file" class="form-control" id="post-image-input">
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">image</label>
+                <input type="file" class="form-control" id="post-image-input" />
+              </div>
+            </form>
           </div>
-         
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="createNewPostClicked()" >Create</button>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="createNewPostClicked()"
+            >
+              Create
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<!--// CREATE POST MODAL //-->
+    <!--// CREATE POST MODAL //-->
 
-<!-- // ========= MODALS ======== //-->
+    <!-- // ========= MODALS ======== //-->
 
+    <!-- ADD POST BUTTON -->
+    <div
+      class="bg-primary"
+      id="add-btn"
+      data-bs-toggle="modal"
+      data-bs-target="#create-post-modal"
+    >
+      +
+    </div>
+    <!--// ADD POST BUTTON //-->
 
+    <!-- ALERTS -->
+    <div
+      class="fade show"
+      id="success-alert"
+      style="position: fixed; z-index: 999999; width: 30%; bottom: 0; right: 0"
+    ></div>
 
-<!-- ADD POST BUTTON -->
- <div class="bg-primary" id="add-btn" data-bs-toggle="modal" data-bs-target="#create-post-modal">
-   +
- </div>
-<!--// ADD POST BUTTON //-->
+    <!--// ALERTS //-->
 
+<<<<<<< HEAD
 
 
 
@@ -179,263 +316,449 @@
       <div class="container col-9   ">
 
         <nav class="navbar navbar-expand-lg bg-body-tertiary shadow  rounded pt-3">
+=======
+    <!-- NAVIGATION BAR CONTAINER -->
+    <div class="container">
+      <div class="d-flex justify-content-center">
+        <div class="container col-9">
+          <nav
+            class="navbar navbar-expand-lg bg-body-tertiary shadow rounded pt-3"
+          >
+>>>>>>> main
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">Tarmeez</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <a class="navbar-brand" href="home.html">Tarmeez</a>
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav" style="width: 100%">
-                  <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  <a class="nav-link active" aria-current="page" href="#"
+                    >Home</a
+                  >
                   <a class="nav-link" href="#">Profile</a>
                   <!--non logged in user -->
-                  <div id="login-div" class="d-flex  justify-content-end " style="width: 100%">
-                    <button id="login-btn" type="button" class="btn btn-outline-success mx-2" data-bs-toggle="modal" data-bs-target="#login-modal" >Login</button>
-                    <button id="register-btn" type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#register-modal" >Register</button>
+                  <div
+                    id="login-div"
+                    class="d-flex justify-content-end"
+                    style="width: 100%"
+                  >
+                    <button
+                      id="login-btn"
+                      type="button"
+                      class="btn btn-outline-success mx-2"
+                      data-bs-toggle="modal"
+                      data-bs-target="#login-modal"
+                    >
+                      Login
+                    </button>
+                    <button
+                      id="register-btn"
+                      type="button"
+                      class="btn btn-outline-success"
+                      data-bs-toggle="modal"
+                      data-bs-target="#register-modal"
+                    >
+                      Register
+                    </button>
                   </div>
                   <!--//non logged in user //-->
 
-
                   <!-- for logged in user -->
-                  <div id="logout-div" class="d-flex  justify-content-end " style="width: 100%">
-                    <button onclick="logout()" id="logout-btn" type="button" class="btn btn-outline-danger mx-2" data-bs-toggle="modal" >Logout</button>
-                    
+                  <div
+                    id="logout-div"
+                    class="d-flex justify-content-end align-items-center"
+                    style="width: 100%"
+                  >
+                    <img
+                      id="nav-user-image"
+                      class="rounded-circle"
+                      style="width: 40px; height: 40px"
+                      src="./profile-pics/profile.png"
+                      alt=""
+                    />
+                    <b id="nav-username"> @Yarhmm </b>
+                    <button
+                      onclick="logout()"
+                      id="logout-btn"
+                      type="button"
+                      class="btn btn-outline-danger mx-2"
+                      data-bs-toggle="modal"
+                    >
+                      Logout
+                    </button>
                   </div>
-                      
+
                   <!--// for logged in user //-->
-
-
-                  
                 </div>
               </div>
             </div>
           </nav>
+        </div>
+      </div>
     </div>
 
-     </div>
-   
- </div>
+    <!--// NAVIGATION BAR CONTAINER //-->
 
-<!--// NAVIGATION BAR CONTAINER //-->
+    <!-- MAIN CONTENT -->
+    <div class="container" style="height: 1000px">
+      <!-- POSTS  -->
 
-<!-- MAIN CONTENT -->
-<div class="container  " style="height: 1000px; ">
-    
-     <!-- POSTS  -->
-      
-     <div class="d-flex justify-content-center mt-5 ">
-   
-        <div class="container col-9   ">
+      <div class="d-flex justify-content-center mt-5">
+        <div class="container col-9">
+          <div id="posts">
+            <!-- POST -->
 
-           <div id="posts">
-        
-               <!-- POST -->
-              
-               <!-- <div class="card shadow ">
-                    <div class="card-header">
-                      <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="./profile-pics/profile.png" alt="">
-                      <b>@Yarhmm</b>   
-                    </div>
-                    <div class="card-body">
-                      <img class="w-100" src="./profile-pics/Capture d'écran 2024-09-11 045622.png" alt="" >
-                      <h6 style="color: rgb(193, 193, 193);" class="mt-1" > 2 min ago</h6>
-                      <h5>hello world !</h5>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto doloribus consectetur, fuga quasi accusantium error illo quaerat tempora. Sint asperiores dolorem debitis veniam nulla excepturi? Iure ipsa qui numquam possimus?</p>
-                      <hr>
-                      <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
-                          <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
-                        </svg>
-                        <span>(3) comments</span>
-                      </div>
-                      
-                    </div>
-              </div>    -->
-               <!--// POST //-->
-
-
-                 <!-- POST -->
-              
-                 <!-- <div class="card shadow  ">
-                  <div class="card-header">
-                    <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="./profile-pics/profile.png" alt="">
-                    <b>@Yarhmm</b>   
-                  </div>
-                  <div class="card-body">
-                    <img class="w-100" src="./profile-pics/Capture d'écran 2024-09-11 045622.png" alt="" >
-                    <h6 style="color: rgb(193, 193, 193);" class="mt-1" > 2 min ago</h6>
-                    <h5>hello world !</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto doloribus consectetur, fuga quasi accusantium error illo quaerat tempora. Sint asperiores dolorem debitis veniam nulla excepturi? Iure ipsa qui numquam possimus?</p>
-                    <hr>
-                    <div>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
-                        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
-                      </svg>
-                      <span>(3) comments</span>
-                    </div>
-                    
-                  </div>
-            </div>    -->
-             <!--// POST //-->
-
-
-               <!-- POST -->
-              
-               <!-- <div class="card shadow ">
-                <div class="card-header">
-                  <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="./profile-pics/profile.png" alt="">
-                  <b>@Yarhmm</b>   
-                </div>
-                <div class="card-body">
-                  <img class="w-100" src="./profile-pics/Capture d'écran 2024-09-11 045622.png" alt="" >
-                  <h6 style="color: rgb(193, 193, 193);" class="mt-1" > 2 min ago</h6>
-                  <h5>hello world !</h5>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto doloribus consectetur, fuga quasi accusantium error illo quaerat tempora. Sint asperiores dolorem debitis veniam nulla excepturi? Iure ipsa qui numquam possimus?</p>
-                  <hr>
-                  <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
-                      <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
-                    </svg>
-                    <span>(3) comments</span>
-                  </div>
-                  
-                </div>
-          </div>    -->
-           <!--// POST //-->
-
-
-             <!-- POST -->
-              
-             <!-- <div class="card shadow ">
+            <div class="card shadow">
               <div class="card-header">
-                <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="./profile-pics/profile.png" alt="">
-                <b>@Yarhmm</b>   
+                <img
+                  class="rounded-circle border border-2"
+                  style="width: 40px; height: 40px"
+                  src="./profile-pics/profile.png"
+                  alt=""
+                />
+                <b>@Yarhmm</b>
               </div>
               <div class="card-body">
-                <img class="w-100" src="./profile-pics/Capture d'écran 2024-09-11 045622.png" alt="" >
-                <h6 style="color: rgb(193, 193, 193);" class="mt-1" > 2 min ago</h6>
+                <img
+                  class="w-100"
+                  src="./profile-pics/Capture d'écran 2024-09-11 045622.png"
+                  alt=""
+                />
+                <h6 style="color: rgb(193, 193, 193)" class="mt-1">
+                  2 min ago
+                </h6>
                 <h5>hello world !</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto doloribus consectetur, fuga quasi accusantium error illo quaerat tempora. Sint asperiores dolorem debitis veniam nulla excepturi? Iure ipsa qui numquam possimus?</p>
-                <hr>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Iusto doloribus consectetur, fuga quasi accusantium error illo
+                  quaerat tempora. Sint asperiores dolorem debitis veniam nulla
+                  excepturi? Iure ipsa qui numquam possimus?
+                </p>
+                <hr />
                 <div>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
-                    <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-pen"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"
+                    />
                   </svg>
                   <span>(3) comments</span>
                 </div>
-                
               </div>
-        </div>    -->
-         <!--// POST //-->
-
-
-          <!-- POST -->
-<!--           
-          <div class="card shadow ">
-            <div class="card-header">
-              <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="./profile-pics/profile.png"
-                alt="">
-              <b>@Yarhmm</b>
             </div>
-            <div class="card-body">
-              <img class="w-100" src="./profile-pics/Capture d'écran 2024-09-11 045622.png" alt="">
-              <h6 style="color: rgb(193, 193, 193);" class="mt-1"> 2 min ago</h6>
-              <h5>hello world !</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto doloribus consectetur, fuga quasi accusantium
-                error illo quaerat tempora. Sint asperiores dolorem debitis veniam nulla excepturi? Iure ipsa qui numquam
-                possimus?</p>
-              <hr>
-              <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen"
-                  viewBox="0 0 16 16">
-                  <path
-                    d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z" />
-                </svg>
-                <span>(3) comments</span>
+            <!--// POST //-->
+
+            <!-- POST -->
+
+            <div class="card shadow">
+              <div class="card-header">
+                <img
+                  class="rounded-circle border border-2"
+                  style="width: 40px; height: 40px"
+                  src="./profile-pics/profile.png"
+                  alt=""
+                />
+                <b>@Yarhmm</b>
               </div>
-          
-            </div>
-          </div> -->
-          <!--// POST //-->
-          
-          
-          <!-- POST -->
-          
-          <!-- <div class="card shadow ">
-            <div class="card-header">
-              <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="./profile-pics/profile.png"
-                alt="">
-              <b>@Yarhmm</b>
-            </div>
-            <div class="card-body">
-              <img class="w-100" src="./profile-pics/Capture d'écran 2024-09-11 045622.png" alt="">
-              <h6 style="color: rgb(193, 193, 193);" class="mt-1"> 2 min ago</h6>
-              <h5>hello world !</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto doloribus consectetur, fuga quasi accusantium
-                error illo quaerat tempora. Sint asperiores dolorem debitis veniam nulla excepturi? Iure ipsa qui numquam
-                possimus?</p>
-              <hr>
-              <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen"
-                  viewBox="0 0 16 16">
-                  <path
-                    d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z" />
-                </svg>
-                <span>(3) comments</span>
+              <div class="card-body">
+                <img
+                  class="w-100"
+                  src="./profile-pics/Capture d'écran 2024-09-11 045622.png"
+                  alt=""
+                />
+                <h6 style="color: rgb(193, 193, 193)" class="mt-1">
+                  2 min ago
+                </h6>
+                <h5>hello world !</h5>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Iusto doloribus consectetur, fuga quasi accusantium error illo
+                  quaerat tempora. Sint asperiores dolorem debitis veniam nulla
+                  excepturi? Iure ipsa qui numquam possimus?
+                </p>
+                <hr />
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-pen"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"
+                    />
+                  </svg>
+                  <span>(3) comments</span>
+                </div>
               </div>
-          
             </div>
-          </div> -->
-          <!--// POST //-->
+            <!--// POST //-->
 
-           </div>
+            <!-- POST -->
 
-       </div>
+            <div class="card shadow">
+              <div class="card-header">
+                <img
+                  class="rounded-circle border border-2"
+                  style="width: 40px; height: 40px"
+                  src="./profile-pics/profile.png"
+                  alt=""
+                />
+                <b>@Yarhmm</b>
+              </div>
+              <div class="card-body">
+                <img
+                  class="w-100"
+                  src="./profile-pics/Capture d'écran 2024-09-11 045622.png"
+                  alt=""
+                />
+                <h6 style="color: rgb(193, 193, 193)" class="mt-1">
+                  2 min ago
+                </h6>
+                <h5>hello world !</h5>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Iusto doloribus consectetur, fuga quasi accusantium error illo
+                  quaerat tempora. Sint asperiores dolorem debitis veniam nulla
+                  excepturi? Iure ipsa qui numquam possimus?
+                </p>
+                <hr />
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-pen"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"
+                    />
+                  </svg>
+                  <span>(3) comments</span>
+                </div>
+              </div>
+            </div>
+            <!--// POST //-->
 
+            <!-- POST -->
 
+            <div class="card shadow">
+              <div class="card-header">
+                <img
+                  class="rounded-circle border border-2"
+                  style="width: 40px; height: 40px"
+                  src="./profile-pics/profile.png"
+                  alt=""
+                />
+                <b>@Yarhmm</b>
+              </div>
+              <div class="card-body">
+                <img
+                  class="w-100"
+                  src="./profile-pics/Capture d'écran 2024-09-11 045622.png"
+                  alt=""
+                />
+                <h6 style="color: rgb(193, 193, 193)" class="mt-1">
+                  2 min ago
+                </h6>
+                <h5>hello world !</h5>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Iusto doloribus consectetur, fuga quasi accusantium error illo
+                  quaerat tempora. Sint asperiores dolorem debitis veniam nulla
+                  excepturi? Iure ipsa qui numquam possimus?
+                </p>
+                <hr />
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-pen"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"
+                    />
+                  </svg>
+                  <span>(3) comments</span>
+                </div>
+              </div>
+            </div>
+            <!--// POST //-->
+
+            <!-- POST -->
+
+            <div class="card shadow">
+              <div class="card-header">
+                <img
+                  class="rounded-circle border border-2"
+                  style="width: 40px; height: 40px"
+                  src="./profile-pics/profile.png"
+                  alt=""
+                />
+                <b>@Yarhmm</b>
+              </div>
+              <div class="card-body">
+                <img
+                  class="w-100"
+                  src="./profile-pics/Capture d'écran 2024-09-11 045622.png"
+                  alt=""
+                />
+                <h6 style="color: rgb(193, 193, 193)" class="mt-1">
+                  2 min ago
+                </h6>
+                <h5>hello world !</h5>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Iusto doloribus consectetur, fuga quasi accusantium error illo
+                  quaerat tempora. Sint asperiores dolorem debitis veniam nulla
+                  excepturi? Iure ipsa qui numquam possimus?
+                </p>
+                <hr />
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-pen"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"
+                    />
+                  </svg>
+                  <span>(3) comments</span>
+                </div>
+              </div>
+            </div>
+            <!--// POST //-->
+
+            <!-- POST -->
+
+            <div class="card shadow">
+              <div class="card-header">
+                <img
+                  class="rounded-circle border border-2"
+                  style="width: 40px; height: 40px"
+                  src="./profile-pics/profile.png"
+                  alt=""
+                />
+                <b>@Yarhmm</b>
+              </div>
+              <div class="card-body">
+                <img
+                  class="w-100"
+                  src="./profile-pics/Capture d'écran 2024-09-11 045622.png"
+                  alt=""
+                />
+                <h6 style="color: rgb(193, 193, 193)" class="mt-1">
+                  2 min ago
+                </h6>
+                <h5>hello world !</h5>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Iusto doloribus consectetur, fuga quasi accusantium error illo
+                  quaerat tempora. Sint asperiores dolorem debitis veniam nulla
+                  excepturi? Iure ipsa qui numquam possimus?
+                </p>
+                <hr />
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-pen"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"
+                    />
+                  </svg>
+                  <span>(3) comments</span>
+                </div>
+              </div>
+            </div>
+            <!--// POST //-->
+          </div>
+        </div>
+      </div>
+
+      <!--// POSTS // -->
     </div>
+    <!--// MAIN CONTENT //-->
+  </body>
 
-     <!--// POSTS // -->
+  <script src="./mainLogic.js"></script>
 
-</div>
-<!--// MAIN CONTENT //-->
-<img  id="po" src="" alt="">
+  <script>
+    //i cut baseUrl and paste it in mainLogic.js
+    let currentPage = 1;
+    let lastPage = 1;
 
+    //===================== INFINITE SCROLL (pagination)============================= //
+    // window.addEventListener("scroll", function () {
+    //   const endOfPage =
+    //     window.innerHeight + window.pageYOffset >= document.body.offsetHeight;
+    //   if (endOfPage && currentPage < lastPage) {
+    //     // c equivalent a if(endofpage == true)
+    //     currentPage = currentPage + 1;
+    //     getPosts(false, currentPage);
+    //   }
+    // });
+    //=====================// INFINITE SCROLL (pagination) // ======================= //
 
+    setupUi();
 
-</body>
+    getPosts();
 
+    function getPosts(reload = true, page = 1) {
+      axios
+        .get(`${baseUrl}/posts?limit=40&page=${page}`)
+        .then(function (response) {
+          const posts = response.data.data;
 
-<script>
+          lastPage = response.data.meta.last_page;
 
-  setupUi();
-  
- const baseUrl = "https://tarmeezacademy.com/api/v1" ;
- getPosts();
+          if (reload) {
+            document.getElementById("posts").innerHTML = "";
+          }
 
-  function getPosts(){
+          for (let post of posts) {
+            const author = post.author;
+            let postTitle = "";
+            if (post.title != null) {
+              postTitle = post.title;
+            }
 
-    axios.get(`${baseUrl}/posts?limit=4`)
-   .then(function (response) {
-   // handle success
-
-      const posts = response.data.data;
-      document.getElementById("posts").innerHTML= "";
-
-      for(let post of posts){
-       const  author = post.author;
-       let  postTitle = "";
-       if (post.title != null){
-         postTitle = post.title;
-       }
-    
-         let content = `
+            let content = `
          <div class="card shadow ">
                   <div class="card-header">
                     <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="${author.profile_image}" alt="">
                     <b>${author.username}</b>   
                   </div>
-                  <div class="card-body">
+                  <div class="card-body" onclick="postClicked(${post.id})" style = "cursor : pointer">
                     <img class="w-100" src="${post.image}" alt="" >
                     <h6 style="color: rgb(193, 193, 193);" class="mt-1" > ${post.created_at}</h6>
                     <h5>${postTitle}</h5>
@@ -456,16 +779,17 @@
                   </div>
             </div>   
     `;
-    document.getElementById("posts").innerHTML += content;
-    
-    let currentPostTagsId = `post-tags-${post.id}`;
-    document.getElementById(currentPostTagsId).innerHTML = "";
-    for( tag of post.tags){
-      let tagsContent = `
+            document.getElementById("posts").innerHTML += content;
+
+            let currentPostTagsId = `post-tags-${post.id}`;
+            document.getElementById(currentPostTagsId).innerHTML = "";
+            for (tag of post.tags) {
+              let tagsContent = `
           <button class= "btn btn-sm  rounded-5" style="background-color : gray ; color : white" >
                ${tag.name}
           </button> 
       `;
+<<<<<<< HEAD
       document.getElementById(currentPostTagsId).innerHTML += tagsContent;     
      }
    
@@ -483,26 +807,24 @@
     const params = {
       "username" : username, 
       "password" : password
+=======
+              document.getElementById(currentPostTagsId).innerHTML +=
+                tagsContent;
+            }
+          }
+        });
+>>>>>>> main
     }
 
-    const url = `${baseUrl}/login`;
+    // cut function loginBtnClicked and paste it in file mainLogic.js
 
-    axios.post(url, params)
-  .then(function (response) {
-     
-   localStorage.setItem("token" , response.data.token);  
-   localStorage.setItem("user" , JSON.stringify (response.data.user) );  
+    // cut function registerBtnClicked and paste it in file mainLogic.js
 
-   const modal = document.getElementById("login-modal"); 
-  
-   const modalInstance = bootstrap.Modal.getInstance( modal);
-   modalInstance.hide();
-   setupUi();
-   showAlert("logged in successfully" , "success");
+    // cut function logOut and paste it in file mainLogic.js
 
- })
- }
+    // cut function setupUi and paste it in file mainLogic.js
 
+<<<<<<< HEAD
  function registerBtnClicked(){
     const name = document.getElementById("register-name-input").value;
     const username = document.getElementById("register-username-input").value;
@@ -642,3 +964,45 @@ function showAlert(costumMessage, type="success"){
 
 </script>
 </html>
+=======
+    // cut function getCurrentUser and paste it in file mainLogic.js
+    function postClicked(postId) {
+      window.location = `postDetails.html?postId=${postId}`;
+    }
+    function createNewPostClicked() {
+      const title = document.getElementById("post-title-input").value;
+      const body = document.getElementById("post-body-input").value;
+      const image = document.getElementById("post-image-input").files[0];
+
+      let formData = new FormData();
+      formData.append("body", body);
+      formData.append("title", title);
+      formData.append("image", image);
+
+      const url = `${baseUrl}/posts`;
+      const token = localStorage.getItem("token");
+      const headers = {
+        authorization: `Bearer ${token}`,
+      };
+      axios
+        .post(url, formData, {
+          headers: headers,
+        })
+        .then((response) => {
+          const modal = document.getElementById("create-post-modal");
+          const modalInstance = bootstrap.Modal.getInstance(modal);
+          modalInstance.hide();
+
+          showAlert("the Post has been created ", "success");
+          getPosts();
+        })
+        .catch((error) => {
+          const message = error.response.data.message;
+          showAlert(message, "danger");
+        });
+    }
+
+    // cut function showAlert and paste it in file mainLogic.js
+  </script>
+</html>
+>>>>>>> main
