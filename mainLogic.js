@@ -4,6 +4,7 @@ function setupUi() {
   const token = localStorage.getItem("token");
   const loginDiv = document.getElementById("login-div");
   const logoutDiv = document.getElementById("logout-div");
+  // const addCommentUi = document.getElementById("add-comment-ui");
 
   // ADD BUTTON
   const addBtn = document.getElementById("add-btn");
@@ -15,6 +16,7 @@ function setupUi() {
     }
     loginDiv.style.setProperty("display", "flex", "important");
     logoutDiv.style.setProperty("display", "none", "important");
+    // addCommentUi.style.setProperty("display", "none", "important");
   } else {
     // for logged in user
     if (addBtn != null) {
@@ -25,6 +27,7 @@ function setupUi() {
     const user = getCurrentUser();
     document.getElementById("nav-username").innerHTML = user.username;
     document.getElementById("nav-user-image").src = user.profile_image;
+    // addCommentUi.style.setProperty("display", "block", "important");
   }
 }
 
@@ -50,6 +53,7 @@ function loginBtnClicked() {
     modalInstance.hide();
     setupUi();
     showAlert("logged in successfully", "success");
+    setupAddComment();
   });
 }
 
@@ -97,6 +101,7 @@ function logout() {
   localStorage.removeItem("user");
   setupUi();
   showAlert("logged out successfully");
+  setupAddComment();
 }
 
 function showAlert(costumMessage, type = "success") {
