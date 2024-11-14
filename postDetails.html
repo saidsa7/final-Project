@@ -634,5 +634,32 @@
           showAlert(errorMessage, "danger");
         });
     }
+
+    setupUiAddComment();
+    function setupUiAddComment() {
+      const addCommentDiv = document.getElementById("add-comment-div");
+      let token = localStorage.getItem("token");
+      if (token) {
+        addCommentDiv.setProperty("display", "flex", "important");
+        // addCommentDiv.setAttribute("hidden", false);
+        // addCommentDiv.style.display = "block";
+      } else {
+        addCommentDiv.setProperty("display", "none", "important");
+        // addCommentDiv.setAttribute("hidden", true);
+        // addCommentDiv.style.display = "none";
+        getPost();
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const token = localStorage.getItem("token");
+      const addCommentDiv = document.getElementById("add-comment-div");
+
+      if (token) {
+        addCommentDiv.style.display = "block"; // إظهار العنصر
+      } else {
+        addCommentDiv.style.display = "none"; // إخفاء العنصر
+      }
+    });
   </script>
 </html>
