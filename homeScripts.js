@@ -32,16 +32,19 @@ function getPosts(reload = true, page = 1) {
       const author = post.author;
       let postTitle = "";
 
-      // show or hide (edit) button
+      // show or hide (edit) button + delete button
       let user = getCurrentUser();
       let isMyPost = user != null && user.id == post.author.id;
       let editBtnContent = ``;
+      let deleteContent = ``;
       if (isMyPost) {
         editBtnContent = ` <button class=" btn btn-secondary " style="float: right" onclick="editPostBtnClicked('${encodeURIComponent(
           JSON.stringify(post)
         )}')" >edit</button>`;
+
+        deleteContent = ` <button class=" btn btn-secondary " style="float: right" onclick="deletePostBtnClicked(${post.id})" >delete post</button>`;
       }
-      //  //show or hide (edit) button //
+      //  //show or hide (edit) button + delete button //
 
       if (post.title != null) {
         postTitle = post.title;
@@ -53,6 +56,7 @@ function getPosts(reload = true, page = 1) {
                    <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="${author.profile_image}" alt="">
                    <b>${author.username}</b>   
                    ${editBtnContent}
+                   ${deleteContent}
                  </div>
                  <div class="card-body" onclick="postClicked(${post.id})" style = "cursor : pointer">
                    <img class="w-100" src="${post.image}" alt="" >
@@ -177,4 +181,25 @@ function addBtnClicked() {
     {}
   );
   postModal.toggle();
+}
+
+function deletePostBtnClicked(postId) {
+  url = `${baseUrl}/posts/${postId}`;
+  const token = localStorage.getItem("token");
+  const headers = {
+    authorization: `Bearer ${token}`,
+  };
+
+  axios
+    .delete(url, {
+      headers: headers,
+    })
+    .then((response) => {
+      showAlert("the Post has been deleted ", "success");
+      getPosts();
+    })
+    .catch((error) => {
+      const message = error.response.data.message;
+      showAlert(message, "danger");
+    });
 }
