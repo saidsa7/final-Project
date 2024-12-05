@@ -365,7 +365,12 @@
                     href="home.html"
                     >Home</a
                   >
-                  <a class="nav-link" href="profile.html">Profile</a>
+                  <a
+                    onclick="profileClicked()"
+                    class="nav-link"
+                    href="profile.html"
+                    >Profile</a
+                  >
                   <!--non logged in user -->
                   <div
                     id="login-div"
@@ -459,16 +464,24 @@
                   class="col-4 d-flex flex-column justify-content-evenly"
                   style="font-weight: 900"
                 >
-                  <div class="user-main-info">yarob@gmail.com</div>
-                  <div class="user-main-info">yarob</div>
-                  <div class="user-main-info">yarob99</div>
+                  <div id="profile-email" class="user-main-info">
+                    yarob@gmail.com
+                  </div>
+                  <div id="profile-name" class="user-main-info">yarob</div>
+                  <div id="profile-username" class="user-main-info">
+                    yarob99
+                  </div>
                 </div>
                 <!--// USERNAME EMAIL NAME //-->
 
                 <!--  posts and comments count -->
                 <div class="col-4 d-flex flex-column justify-content-evenly">
-                  <div class="number-info"><span>13</span>Posts</div>
-                  <div class="number-info"><span>20</span>Comments</div>
+                  <div id="profile-posts-count" class="number-info">
+                    <span>13</span>Posts
+                  </div>
+                  <div id="profile-comments-count" class="number-info">
+                    <span>20</span>Comments
+                  </div>
                 </div>
                 <!--//  posts and comments count //-->
               </div>
