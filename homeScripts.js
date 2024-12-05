@@ -32,16 +32,21 @@ function getPosts(reload = true, page = 1) {
       const author = post.author;
       let postTitle = "";
 
-      // show or hide (edit) button
+      // show or hide (edit + delete) button
       let user = getCurrentUser();
       let isMyPost = user != null && user.id == post.author.id;
       let editBtnContent = ``;
       if (isMyPost) {
-        editBtnContent = ` <button class=" btn btn-secondary " style="float: right" onclick="editPostBtnClicked('${encodeURIComponent(
-          JSON.stringify(post)
-        )}')" >edit</button>`;
+        editBtnContent = `
+         <button class=" btn btn-danger " style=" ; margin-left : 5px; float: right" onclick="deletePostBtnClicked('${encodeURIComponent(
+           JSON.stringify(post)
+         )}')" >delete</button>
+
+         <button class=" btn btn-secondary " style="  float: right " onclick="editPostBtnClicked('${encodeURIComponent(
+           JSON.stringify(post)
+         )}')" >edit</button>`;
       }
-      //  //show or hide (edit) button //
+      //  //show or hide (edit + delete) button //
 
       if (post.title != null) {
         postTitle = post.title;
@@ -162,6 +167,45 @@ function editPostBtnClicked(postObject) {
     {}
   );
   postModal.toggle();
+}
+
+function deletePostBtnClicked(postObject) {
+  let post = JSON.parse(decodeURIComponent(postObject));
+  console.log(post);
+
+  document.getElementById("delete-post-id-input").value = post.id;
+  let postModal = new bootstrap.Modal(
+    document.getElementById("delete-post-modal"),
+    {}
+  );
+  postModal.toggle();
+}
+
+function confirmPostDelete() {
+  const postId = document.getElementById("delete-post-id-input").value;
+
+  const url = `${baseUrl}/posts/${postId}`;
+  const token = localStorage.getItem("token");
+  const headers = {
+    authorization: `Bearer ${token}`,
+  };
+
+  axios
+    .delete(url, {
+      headers: headers,
+    })
+    .then(function (response) {
+      const modal = document.getElementById("delete-post-modal");
+      const modalInstance = bootstrap.Modal.getInstance(modal);
+      modalInstance.hide();
+
+      showAlert("the Post has been deleted successfully ", "success");
+      getPosts();
+    })
+    .catch((error) => {
+      const message = error.response.data.message;
+      showAlert(message, "danger");
+    });
 }
 
 function addBtnClicked() {

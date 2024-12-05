@@ -263,6 +263,53 @@
 
     <!--// CREATE POST MODAL //-->
 
+    <!-- DELETE POST MODAL -->
+
+    <div
+      class="modal fade"
+      id="delete-post-modal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="post-modal-title">
+              Are you sure you want to delete the post ?
+              <span id="delete-post-title"></span>
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+            <input type="hidden" id="delete-post-id-input" value="" />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              id="post-modal-submit-btn"
+              type="button"
+              class="btn btn-danger"
+              onclick="confirmPostDelete()"
+            >
+              yes delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--// DELETE POST MODAL //-->
+
     <!-- // ========= MODALS ======== //-->
 
     <!-- ADD POST BUTTON -->
@@ -300,10 +347,13 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav" style="width: 100%">
-                  <a class="nav-link active" aria-current="page" href="#"
+                  <a
+                    class="nav-link active"
+                    aria-current="page"
+                    href="home.html"
                     >Home</a
                   >
-                  <a class="nav-link" href="#">Profile</a>
+                  <a class="nav-link" href="profile.html">Profile</a>
                   <!--non logged in user -->
                   <div
                     id="login-div"
@@ -370,12 +420,10 @@
     <!-- MAIN CONTENT -->
     <div class="container" style="height: 1000px">
       <!-- POSTS  -->
-
       <div class="d-flex justify-content-center mt-5">
         <div class="container col-9">
           <div id="posts">
             <!-- POST -->
-
             <div class="card shadow">
               <div class="card-header">
                 <img
@@ -423,7 +471,6 @@
             <!--// POST //-->
 
             <!-- POST -->
-
             <div class="card shadow">
               <div class="card-header">
                 <img
@@ -471,7 +518,6 @@
             <!--// POST //-->
 
             <!-- POST -->
-
             <div class="card shadow">
               <div class="card-header">
                 <img
@@ -519,7 +565,6 @@
             <!--// POST //-->
 
             <!-- POST -->
-
             <div class="card shadow">
               <div class="card-header">
                 <img
