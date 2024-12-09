@@ -366,7 +366,7 @@
                     >Home</a
                   >
                   <a
-                    onclick="profileClicked()"
+                    onclick="profileClicked(event)"
                     class="nav-link"
                     href="profile.html"
                     >Profile</a
@@ -476,11 +476,11 @@
 
                 <!--  posts and comments count -->
                 <div class="col-4 d-flex flex-column justify-content-evenly">
-                  <div id="profile-posts-count" class="number-info">
-                    <span>13</span>Posts
+                  <div class="number-info">
+                    <span id="profile-posts-count">13</span>Posts
                   </div>
-                  <div id="profile-comments-count" class="number-info">
-                    <span>20</span>Comments
+                  <div class="number-info">
+                    <span id="profile-comments-count">20</span>Comments
                   </div>
                 </div>
                 <!--//  posts and comments count //-->

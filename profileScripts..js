@@ -1,8 +1,9 @@
 setupUi();
 
-function profileClicked() {
+function profileClicked(event) {
   user = getCurrentUser();
   if (user != null) {
+    event.preventDefault();
     document.getElementById("profile-email").innerHTML = user.email;
     document.getElementById("profile-name").innerHTML = user.name;
     document.getElementById("profile-username").innerHTML = user.username;
