@@ -16,6 +16,9 @@ let lastPage = 1;
 
 setupUi();
 
+function userClicked(userId) {
+  window.location = `profile.html?userId=${userId}`;
+}
 getPosts();
 
 function getPosts(reload = true, page = 1) {
@@ -54,9 +57,11 @@ function getPosts(reload = true, page = 1) {
 
       let content = `
         <div class="card shadow ">
-                 <div class="card-header">
-                   <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="${author.profile_image}" alt="">
-                   <b>${author.username}</b>   
+                 <div class="card-header"  >
+                   <span onclick="userClicked(${author.id})" style = "cursor: pointer"  >
+                      <img class="rounded-circle border border-2" style="width: 40px; height: 40px;" src="${author.profile_image}" alt="">
+                      <b>${author.username}</b> 
+                   </span>
                    ${editBtnContent}
                  </div>
                  <div class="card-body" onclick="postClicked(${post.id})" style = "cursor : pointer">
@@ -72,7 +77,7 @@ function getPosts(reload = true, page = 1) {
                      <span>
                        ${post.comments_count} comments
                          <span id="post-tags-${post.id}">
-                         </span
+                         </span>
                        </span> 
                     
                    </div>
@@ -108,105 +113,12 @@ function getPosts(reload = true, page = 1) {
 function postClicked(postId) {
   window.location = `postDetails.html?postId=${postId}`;
 }
-function createNewPostClicked() {
-  let postId = document.getElementById("post-id-input").value;
-  let isCreate = postId == null || postId == "";
 
-  const title = document.getElementById("post-title-input").value;
-  const body = document.getElementById("post-body-input").value;
-  const image = document.getElementById("post-image-input").files[0];
-
-  let formData = new FormData();
-  formData.append("body", body);
-  formData.append("title", title);
-  formData.append("image", image);
-
-  const token = localStorage.getItem("token");
-  const headers = {
-    authorization: `Bearer ${token}`,
-  };
-
-  let url = ``;
-  if (isCreate) {
-    url = `${baseUrl}/posts`;
-  } else {
-    url = `${baseUrl}/posts/${postId}`;
-    formData.append("_method", "put");
-  }
-
-  axios
-    .post(url, formData, {
-      headers: headers,
-    })
-    .then((response) => {
-      const modal = document.getElementById("create-post-modal");
-      const modalInstance = bootstrap.Modal.getInstance(modal);
-      modalInstance.hide();
-
-      showAlert("the Post has been created ", "success");
-      getPosts();
-    })
-    .catch((error) => {
-      const message = error.response.data.message;
-      showAlert(message, "danger");
-    });
-}
+// i cut the function createNewPostClicked and paste it in mainLogic.js
 
 // cut function showAlert and paste it in file mainLogic.js
 
-function editPostBtnClicked(postObject) {
-  document.getElementById("post-modal-submit-btn").innerHTML = "update";
-  let post = JSON.parse(decodeURIComponent(postObject));
-  console.log(post);
-  document.getElementById("post-id-input").value = post.id;
-  document.getElementById("post-modal-title").innerHTML = "Edit Post";
-  document.getElementById("post-title-input").value = post.title;
-  document.getElementById("post-body-input").value = post.body;
-  let postModal = new bootstrap.Modal(
-    document.getElementById("create-post-modal"),
-    {}
-  );
-  postModal.toggle();
-}
-
-function deletePostBtnClicked(postObject) {
-  let post = JSON.parse(decodeURIComponent(postObject));
-  console.log(post);
-
-  document.getElementById("delete-post-id-input").value = post.id;
-  let postModal = new bootstrap.Modal(
-    document.getElementById("delete-post-modal"),
-    {}
-  );
-  postModal.toggle();
-}
-
-function confirmPostDelete() {
-  const postId = document.getElementById("delete-post-id-input").value;
-
-  const url = `${baseUrl}/posts/${postId}`;
-  const token = localStorage.getItem("token");
-  const headers = {
-    authorization: `Bearer ${token}`,
-  };
-
-  axios
-    .delete(url, {
-      headers: headers,
-    })
-    .then(function (response) {
-      const modal = document.getElementById("delete-post-modal");
-      const modalInstance = bootstrap.Modal.getInstance(modal);
-      modalInstance.hide();
-
-      showAlert("the Post has been deleted successfully ", "success");
-      getPosts();
-    })
-    .catch((error) => {
-      const message = error.response.data.message;
-      showAlert(message, "danger");
-    });
-}
+// i cut 3 func : editP...deleteP... confirmD...and paste it in mainLogic.js
 
 function addBtnClicked() {
   document.getElementById("post-modal-submit-btn").innerHTML = "create";
