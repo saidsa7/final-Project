@@ -1,6 +1,7 @@
-const baseUrl = "https://tarmeezacademy.com/api/v1";
+const baseUrl = "http://localhost:3030/api/v1";
+// const baseUrl = "https://tarmeezAcademy.com/api/v1"
 
-// ===== POST REQUESTS ====
+// ======= POST REQUESTS ======////
 function createNewPostClicked() {
   let postId = document.getElementById("post-id-input").value;
   let isCreate = postId == null || postId == "";
@@ -8,25 +9,27 @@ function createNewPostClicked() {
   const title = document.getElementById("post-title-input").value;
   const body = document.getElementById("post-body-input").value;
   const image = document.getElementById("post-image-input").files[0];
+  const token = localStorage.getItem("token");
 
   let formData = new FormData();
   formData.append("body", body);
   formData.append("title", title);
   formData.append("image", image);
 
-  const token = localStorage.getItem("token");
+  let url = ``;
   const headers = {
+    "Content-Type": "multipart/form-data",
     authorization: `Bearer ${token}`,
   };
 
-  let url = ``;
   if (isCreate) {
     url = `${baseUrl}/posts`;
   } else {
-    url = `${baseUrl}/posts/${postId}`;
     formData.append("_method", "put");
+    url = `${baseUrl}/posts/${postId}`;
   }
 
+  toggleLoader(true);
   axios
     .post(url, formData, {
       headers: headers,
@@ -35,19 +38,23 @@ function createNewPostClicked() {
       const modal = document.getElementById("create-post-modal");
       const modalInstance = bootstrap.Modal.getInstance(modal);
       modalInstance.hide();
-
-      showAlert("the Post has been created ", "success");
+      showAlert("New Post Has Been Created", "success");
       getPosts();
     })
     .catch((error) => {
       const message = error.response.data.message;
       showAlert(message, "danger");
+    })
+    .finally(() => {
+      toggleLoader(false);
     });
 }
+
 function editPostBtnClicked(postObject) {
-  document.getElementById("post-modal-submit-btn").innerHTML = "update";
   let post = JSON.parse(decodeURIComponent(postObject));
   console.log(post);
+
+  document.getElementById("post-modal-submit-btn").innerHTML = "Update";
   document.getElementById("post-id-input").value = post.id;
   document.getElementById("post-modal-title").innerHTML = "Edit Post";
   document.getElementById("post-title-input").value = post.title;
@@ -72,11 +79,11 @@ function deletePostBtnClicked(postObject) {
 }
 
 function confirmPostDelete() {
-  const postId = document.getElementById("delete-post-id-input").value;
-
-  const url = `${baseUrl}/posts/${postId}`;
   const token = localStorage.getItem("token");
+  const postId = document.getElementById("delete-post-id-input").value;
+  const url = `${baseUrl}/posts/${postId}`;
   const headers = {
+    "Content-Type": "multipart/form-data",
     authorization: `Bearer ${token}`,
   };
 
@@ -84,12 +91,11 @@ function confirmPostDelete() {
     .delete(url, {
       headers: headers,
     })
-    .then(function (response) {
+    .then((response) => {
       const modal = document.getElementById("delete-post-modal");
       const modalInstance = bootstrap.Modal.getInstance(modal);
       modalInstance.hide();
-
-      showAlert("the Post has been deleted successfully ", "success");
+      showAlert("The Post Has Been Deleted Successfully", "success");
       getPosts();
     })
     .catch((error) => {
@@ -101,40 +107,42 @@ function confirmPostDelete() {
 function profileClicked() {
   const user = getCurrentUser();
   const userId = user.id;
-  window.location = `profile.html?userId=${userId}`;
+  window.location = `profile.html?userid=${userId}`;
 }
-function setupUi() {
+function setupUI() {
   const token = localStorage.getItem("token");
-  const loginDiv = document.getElementById("login-div");
-  const logoutDiv = document.getElementById("logout-div");
-  // const addCommentUi = document.getElementById("add-comment-ui");
 
-  // ADD BUTTON
+  const loginDiv = document.getElementById("logged-in-div");
+  const logoutDiv = document.getElementById("logout-div");
+
+  // add btn
   const addBtn = document.getElementById("add-btn");
 
   if (token == null) {
-    //user is a guest ( not logged in)
+    // user is guest (not logged in)
     if (addBtn != null) {
       addBtn.style.setProperty("display", "none", "important");
     }
+
     loginDiv.style.setProperty("display", "flex", "important");
     logoutDiv.style.setProperty("display", "none", "important");
-    // addCommentUi.style.setProperty("display", "none", "important");
   } else {
     // for logged in user
+
     if (addBtn != null) {
       addBtn.style.setProperty("display", "block", "important");
     }
+
     loginDiv.style.setProperty("display", "none", "important");
     logoutDiv.style.setProperty("display", "flex", "important");
+
     const user = getCurrentUser();
     document.getElementById("nav-username").innerHTML = user.username;
     document.getElementById("nav-user-image").src = user.profile_image;
-    // addCommentUi.style.setProperty("display", "block", "important");
   }
 }
 
-// =========== AUTH FUNCTIONS ==================
+// ======= AUTH FUNCTIONS ==========
 function loginBtnClicked() {
   const username = document.getElementById("username-input").value;
   const password = document.getElementById("password-input").value;
@@ -145,19 +153,35 @@ function loginBtnClicked() {
   };
 
   const url = `${baseUrl}/login`;
+  toggleLoader(true);
+  axios
+    .post(url, params)
+    .then((response) => {
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
 
-  axios.post(url, params).then(function (response) {
-    localStorage.setItem("token", response.data.token);
-    localStorage.setItem("user", JSON.stringify(response.data.user));
+      const modal = document.getElementById("login-modal");
+      const modalInstance = bootstrap.Modal.getInstance(modal);
+      modalInstance.hide();
 
-    const modal = document.getElementById("login-modal");
+      showAlert("Logged in successfully", "success");
+      setupUI();
+    })
+    .catch((error) => {
+      const message = error.response.data.message;
+      showAlert(message, "danger");
+    })
+    .finally(() => {
+      toggleLoader(false);
+    });
+}
 
-    const modalInstance = bootstrap.Modal.getInstance(modal);
-    modalInstance.hide();
-    setupUi();
-    showAlert("logged in successfully", "success");
-    setupAddComment();
-  });
+function toggleLoader(show = true) {
+  if (show) {
+    document.getElementById("loader").style.visibility = "visible";
+  } else {
+    document.getElementById("loader").style.visibility = "hidden";
+  }
 }
 
 function registerBtnClicked() {
@@ -177,39 +201,45 @@ function registerBtnClicked() {
   };
 
   const url = `${baseUrl}/register`;
+
+  toggleLoader(true);
   axios
     .post(url, formData, {
       headers: headers,
     })
-    .then(function (response) {
+    .then((response) => {
       console.log(response.data);
+
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
 
       const modal = document.getElementById("register-modal");
-
       const modalInstance = bootstrap.Modal.getInstance(modal);
       modalInstance.hide();
-      setupUi();
-      showAlert("New User Registered successfully", "success");
+
+      showAlert("New User Registered Successfully", "success");
+      setupUI();
     })
     .catch((error) => {
       const message = error.response.data.message;
       showAlert(message, "danger");
+    })
+    .finally(() => {
+      toggleLoader(false);
     });
 }
 
 function logout() {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
-  setupUi();
-  showAlert("logged out successfully");
-  setupAddComment();
+  showAlert("Logged out successfully");
+  setupUI();
 }
 
-function showAlert(costumMessage, type = "success") {
+function showAlert(customMessage, type = "success") {
   const alertPlaceholder = document.getElementById("success-alert");
-  const appendAlert = (message, type) => {
+
+  const alert = (message, type) => {
     const wrapper = document.createElement("div");
     wrapper.innerHTML = [
       `<div class="alert alert-${type} alert-dismissible" role="alert">`,
@@ -221,12 +251,15 @@ function showAlert(costumMessage, type = "success") {
     alertPlaceholder.append(wrapper);
   };
 
-  appendAlert(costumMessage, type);
+  alert(customMessage, type);
 
-  // todo : Hide the Alert
+  // todo: hide the alert
   setTimeout(() => {
-    const alert = bootstrap.Alert.getOrCreateInstance("#success-alert");
-    // alert.close();
+    // const alertToHide = bootstrap.Alert.getOrCreateInstance('#success-alert')
+    // document.getElementById("success-alert").hide();
+    // const alert = document.getElementById("success-alert")
+    // const modalAlert = bootstrap.Alert.getInstance(alert)
+    // modalAlert.hide()
   }, 2000);
 }
 
@@ -237,5 +270,6 @@ function getCurrentUser() {
   if (storageUser != null) {
     user = JSON.parse(storageUser);
   }
+
   return user;
 }
