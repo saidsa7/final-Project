@@ -26,7 +26,7 @@ function createNewPostClicked() {
     url = `${baseUrl}/posts/${postId}`;
     formData.append("_method", "put");
   }
-
+  toggleLoader(true);
   axios
     .post(url, formData, {
       headers: headers,
@@ -42,6 +42,9 @@ function createNewPostClicked() {
     .catch((error) => {
       const message = error.response.data.message;
       showAlert(message, "danger");
+    })
+    .finally(() => {
+      toggleLoader(false);
     });
 }
 function editPostBtnClicked(postObject) {
@@ -145,19 +148,28 @@ function loginBtnClicked() {
   };
 
   const url = `${baseUrl}/login`;
+  toggleLoader(true);
+  axios
+    .post(url, params)
+    .then(function (response) {
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
 
-  axios.post(url, params).then(function (response) {
-    localStorage.setItem("token", response.data.token);
-    localStorage.setItem("user", JSON.stringify(response.data.user));
+      const modal = document.getElementById("login-modal");
 
-    const modal = document.getElementById("login-modal");
-
-    const modalInstance = bootstrap.Modal.getInstance(modal);
-    modalInstance.hide();
-    setupUi();
-    showAlert("logged in successfully", "success");
-    setupAddComment();
-  });
+      const modalInstance = bootstrap.Modal.getInstance(modal);
+      modalInstance.hide();
+      setupUi();
+      showAlert("logged in successfully", "success");
+      setupAddComment();
+    })
+    .catch((error) => {
+      const message = error.response.data.message;
+      showAlert(message, "danger");
+    })
+    .finally(() => {
+      toggleLoader(false);
+    });
 }
 
 function registerBtnClicked() {
@@ -177,6 +189,7 @@ function registerBtnClicked() {
   };
 
   const url = `${baseUrl}/register`;
+  toggleLoader(true);
   axios
     .post(url, formData, {
       headers: headers,
@@ -196,6 +209,9 @@ function registerBtnClicked() {
     .catch((error) => {
       const message = error.response.data.message;
       showAlert(message, "danger");
+    })
+    .finally(() => {
+      toggleLoader(false);
     });
 }
 
@@ -238,4 +254,12 @@ function getCurrentUser() {
     user = JSON.parse(storageUser);
   }
   return user;
+}
+
+function toggleLoader(show = true) {
+  if (show) {
+    document.getElementById("loader").style.visibility = "visible";
+  } else {
+    document.getElementById("loader").style.visibility = "hidden";
+  }
 }

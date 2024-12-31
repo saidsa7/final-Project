@@ -3,15 +3,15 @@ let currentPage = 1;
 let lastPage = 1;
 
 //===================== INFINITE SCROLL (pagination)============================= //
-// window.addEventListener("scroll", function () {
-//   const endOfPage =
-//     window.innerHeight + window.pageYOffset >= document.body.offsetHeight;
-//   if (endOfPage && currentPage < lastPage) {
-//     // c equivalent a if(endofpage == true)
-//     currentPage = currentPage + 1;
-//     getPosts(false, currentPage);
-//   }
-// });
+window.addEventListener("scroll", function () {
+  const endOfPage =
+    window.innerHeight + window.scrollY >= document.body.scrollHeight;
+  if (endOfPage && currentPage < lastPage) {
+    // c equivalent a if(endofpage == true)
+    currentPage = currentPage + 1;
+    getPosts(false, currentPage);
+  }
+});
 //=====================// INFINITE SCROLL (pagination) // ======================= //
 
 setupUi();
@@ -22,7 +22,9 @@ function userClicked(userId) {
 getPosts();
 
 function getPosts(reload = true, page = 1) {
-  axios.get(`${baseUrl}/posts?limit=40&page=${page}`).then(function (response) {
+  toggleLoader(true);
+  axios.get(`${baseUrl}/posts?limit=6&page=${page}`).then(function (response) {
+    toggleLoader(false);
     const posts = response.data.data;
 
     lastPage = response.data.meta.last_page;
